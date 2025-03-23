@@ -6,6 +6,8 @@
   strategy: base;
 }
 
+[x-cloak] { display: none !important; }
+
 @custom-variant dark (&:is(.dark *));
 @custom-variant sidebar-expanded (&:is(.sidebar-expanded *));
 
