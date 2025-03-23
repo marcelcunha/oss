@@ -15,8 +15,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        <!-- Styles -->
-        @livewireStyles        
+        <!-- Styles -->    
 
         <script>
             if (localStorage.getItem('dark-mode') === 'false' || !('dark-mode' in localStorage)) {
@@ -60,7 +59,5 @@
             </div>
 
         </div>
-
-        @livewireScriptConfig
     </body>
 </html>
