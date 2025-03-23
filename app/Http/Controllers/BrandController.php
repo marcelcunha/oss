@@ -17,7 +17,8 @@ class BrandController extends Controller
 
         return view('pages.register.brands.index', [
             'header' => ['name' => 'Nome'], 
-            'lines' => $brands
+            'lines' => $brands,
+            'actions' => ['edit' => 'brands.edit', 'delete' => 'brands.destroy']
         ]);
     }
 
@@ -26,7 +27,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.register.brands.create');
     }
 
     /**
@@ -34,15 +35,9 @@ class BrandController extends Controller
      */
     public function store(StoreBrandRequest $request)
     {
-        //
-    }
+        Brand::create($request->validated());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Brand $brand)
-    {
-        //
+        return redirect()->route('brands.index');
     }
 
     /**
@@ -50,7 +45,7 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        return view('pages.register.brands.edit', compact('brand'));
     }
 
     /**
@@ -58,7 +53,9 @@ class BrandController extends Controller
      */
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
-        //
+        $brand->update($request->validated());
+
+        return redirect()->route('brands.index')->with('success', 'Marca atualizada com sucesso!');
     }
 
     /**
@@ -66,6 +63,8 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        $brand->delete();
+
+        return redirect()->route('brands.index')->with('success', 'Marca excluída com sucesso!');
     }
 }

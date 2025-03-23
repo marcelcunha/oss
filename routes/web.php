@@ -28,7 +28,7 @@ Route::redirect('/', 'login');
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::prefix('cadastros')->group(function(){
-        Route::resource('brands', BrandController::class);
+        Route::resource('brands', BrandController::class)->except(['show']);
     });
 
     // Route for the getting the data feed
