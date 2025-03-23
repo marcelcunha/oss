@@ -45,6 +45,7 @@
                  
                     <x-sidebar.menu-entry icon='document-text' label='Cadastros' route-prefix='cadastros'>
                         <x-sidebar.menu-item label='Marcas' route='brands.index'/>
+                        <x-sidebar.menu-item label='Tipos de Equipamento' route='device_types.index'/>
                     </x-sidebar.menu-entry>
                    
                 
