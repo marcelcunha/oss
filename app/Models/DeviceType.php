@@ -9,4 +9,6 @@ class DeviceType extends Model
 {
     /** @use HasFactory<\Database\Factories\DeviceTypeFactory> */
     use HasFactory;
+
+    protected $fillable = ['name'];
 }

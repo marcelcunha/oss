@@ -17,7 +17,7 @@ class DeviceTypeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->unique()->words(4, true),
         ];
     }
 }

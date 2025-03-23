@@ -13,7 +13,13 @@ class DeviceTypeController extends Controller
      */
     public function index()
     {
-        //
+        $deviceTypes = DeviceType::orderBy('name')->paginate(10);
+
+        return view('pages.register.device_types.index', [
+            'lines' => $deviceTypes,
+            'header' => ['name' => 'Name'],
+            'actions' => ['edit' => 'device_types.edit', 'delete' => 'device_types.destroy']
+        ]);
     }
 
     /**
@@ -21,7 +27,7 @@ class DeviceTypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.register.device_types.create');
     }
 
     /**
@@ -29,23 +35,19 @@ class DeviceTypeController extends Controller
      */
     public function store(StoreDeviceTypeRequest $request)
     {
-        //
+        $deviceType = DeviceType::create($request->validated());
+        return redirect()->route('device_types.index')
+            ->with('success', 'Device Type created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(DeviceType $deviceType)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(DeviceType $deviceType)
     {
-        //
+        return view('pages.register.device_types.edit', ['type' => $deviceType]);
     }
 
     /**
@@ -53,7 +55,9 @@ class DeviceTypeController extends Controller
      */
     public function update(UpdateDeviceTypeRequest $request, DeviceType $deviceType)
     {
-        //
+        $deviceType->update($request->validated());
+        return redirect()->route('device_types.index')
+            ->with('success', 'Device Type updated successfully.');
     }
 
     /**
@@ -61,6 +65,7 @@ class DeviceTypeController extends Controller
      */
     public function destroy(DeviceType $deviceType)
     {
-        //
+        $deviceType->delete();
+        return redirect()->route('device_types.index')->with('success', 'Device Type deleted successfully.');
     }
 }
