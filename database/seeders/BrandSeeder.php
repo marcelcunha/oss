@@ -19,6 +19,11 @@ class BrandSeeder extends Seeder
             ['name' => 'Asus'],
             ['name' => 'TP-Link'],
             ['name' => 'Genérico'],
+            ['name' => 'Apple'],
+            ['name' => 'HP'],
+            ['name' => 'Avell'],
+            ['name' => 'Compaq'],
+            ['name' => 'Lenovo']
         ]);
     }
 }

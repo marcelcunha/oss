@@ -13,7 +13,12 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $brands = Brand::orderBy('name')->paginate(10);
+
+        return view('pages.register.brands.index', [
+            'header' => ['name' => 'Nome'], 
+            'lines' => $brands
+        ]);
     }
 
     /**
