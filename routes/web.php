@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
@@ -26,15 +27,17 @@ Route::redirect('/', 'login');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
+    Route::prefix('cadastros')->group(function(){
+        Route::resource('brands', BrandController::class);
+    });
+
     // Route for the getting the data feed
     Route::get('/json-data-feed', [DataFeedController::class, 'getDataFeed'])->name('json_data_feed');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/analytics', [DashboardController::class, 'analytics'])->name('analytics');
     Route::get('/dashboard/fintech', [DashboardController::class, 'fintech'])->name('fintech');
-    Route::get('/ecommerce/customers', [CustomerController::class, 'index'])->name('customers');
-    Route::get('/ecommerce/orders', [OrderController::class, 'index'])->name('orders');
-    Route::get('/ecommerce/invoices', [InvoiceController::class, 'index'])->name('invoices');
+
     Route::get('/ecommerce/shop', function () {
         return view('pages/ecommerce/shop');
     })->name('shop');
@@ -56,9 +59,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/ecommerce/pay', function () {
         return view('pages/ecommerce/pay');
     })->name('pay');
-    Route::get('/campaigns', [CampaignController::class, 'index'])->name('campaigns');
-    Route::get('/community/users-tabs', [MemberController::class, 'indexTabs'])->name('users-tabs');
-    Route::get('/community/users-tiles', [MemberController::class, 'indexTiles'])->name('users-tiles');
+
     Route::get('/community/profile', function () {
         return view('pages/community/profile');
     })->name('profile');
@@ -80,9 +81,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/finance/cards', function () {
         return view('pages/finance/credit-cards');
     })->name('credit-cards');
-    Route::get('/finance/transactions', [TransactionController::class, 'index01'])->name('transactions');
-    Route::get('/finance/transaction-details', [TransactionController::class, 'index02'])->name('transaction-details');
-    Route::get('/job/job-listing', [JobController::class, 'index'])->name('job-listing');
+
     Route::get('/job/job-post', function () {
         return view('pages/job/job-post');
     })->name('job-post');
