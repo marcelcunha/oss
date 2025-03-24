@@ -19,7 +19,7 @@ it('should open create brand page', function(){
 
 it('should save new brand', function(){
     $this->actingAs($this->user)
-    ->post(route('brands.store'),['name' => fake()->words(4, true)])
+    ->post(route('brands.store'),['name' => fake()->company()])
     ->assertRedirect(route('brands.index'));
 });
 

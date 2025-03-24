@@ -10,7 +10,7 @@
                     </th>
                 @endforeach
                 @if (isset($actions))
-                    <th class="p-2">
+                    <th class="p-2 whitespace-nowrap">
                         <div class="font-semibold text-left">Ações</div>
                     </th>
                 @endif
@@ -28,7 +28,7 @@
                         </td>
                     @endforeach
                     @if (isset($actions))
-                        <td>
+                        <td class="whitespace-nowrap">
                             @if (array_key_exists('show', $actions))
                                 <x-button :href="route(data_get($actions, 'show'), $line->id)" class="bg-white hover:bg-white border-gray-200 btn-sm">
                                     <x-heroicon-o-eye class="h-5 w-5 text-gray-200" />

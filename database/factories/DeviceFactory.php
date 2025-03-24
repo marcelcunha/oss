@@ -23,10 +23,10 @@ class DeviceFactory extends Factory
             'client_id' => Client::factory()->create()->id,
             'type_id' => DeviceType::factory()->create()->id,
             'brand_id' => Brand::factory()->create()->id,
-            'model' => $this->faker->word,
-            'serial_number' => $this->faker->unique()->word,
-            'service_tag' => $this->faker->unique()->word,
-            'description' => $this->faker->sentence,
+            'model' => $this->faker->optional()->word(),
+            'serial_number' => $this->faker->optional()->unique()?->word(),
+            'service_tag' => $this->faker->optional()->unique()?->word(),
+            'description' => $this->faker->optional()->sentence(),
         ];
     }
 }

@@ -16,12 +16,17 @@ class DeviceController extends Controller
      */
     public function index()
     {
-        $devices = Device::paginate(10);
+        $devices = Device::query()
+        ->with(['client', 'type', 'brand'])
+        ->paginate(10);
 
         return view('pages.register.devices.index', [
             'lines' => $devices,
             'header' => [
                 'client.name' => 'Proprietário',
+                'type.name' => 'Tipo',
+                'brand.name' => 'Marca',
+                'model' => 'Modelo'
             ],
             'actions' => [
                 'show' => 'devices.show',
