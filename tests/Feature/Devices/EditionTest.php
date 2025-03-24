@@ -29,7 +29,8 @@ it('should update device', function () {
             'serial_number' => 'Device Serial Number Updated',
             'description' => 'Device Description Updated',
         ])
-        ->assertRedirect(route('devices.index'));
+        ->assertRedirect(route('devices.index'))
+        ->assertSessionHas('success', 'Equipamento atualizado com sucesso!');
 
     $this->assertDatabaseHas('devices', [
         'id' => $device->id,
@@ -132,7 +133,7 @@ it('should not update device with service tag bigger than 30 characters', functi
 
 it('should not update device with duplicated serial number', function () {
     $device = Device::factory()->create();
-    $deviceDuplicated = Device::factory()->create();
+    $deviceDuplicated = Device::factory()->create(['serial_number' => 'Serial Number Duplicated']);
 
     $this->actingAs($this->user)
         ->put(route('devices.update', $device->id), [

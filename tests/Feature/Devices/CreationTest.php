@@ -25,7 +25,8 @@ it('should save new device', function () {
             'serial_number' => 'Device Serial Number',
             'description' => 'Device Description',
         ])
-        ->assertRedirect(route('devices.index'));
+        ->assertRedirect(route('devices.index'))
+        ->assertSessionHas('success', 'Equipamento cadastrado com sucesso!');
 });
 
 it('should not save new device without client', function () {

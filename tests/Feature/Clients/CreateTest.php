@@ -26,7 +26,8 @@ it('should save new client', function () {
             'num' => '123',
             'complement' => 'Client Complement',
         ])
-        ->assertRedirect(route('clients.index'));
+        ->assertRedirect(route('clients.index'))
+        ->assertSessionHas('success', 'Cliente cadastrado com sucesso!');
 });
 
 it('should not save new client without name', function () {

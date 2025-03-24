@@ -25,7 +25,7 @@ it('should save edited client', function () {
     $phone = fake()->cellphoneNumber();
     $address = fake()->streetName();
     $num = fake()->randomNumber(3);
-    $complement = fake()->sentence();
+    $complement = fake()->optional()->words(3, true);
 
     $this->actingAs($this->user)
         ->put(route('clients.update', $client), [
@@ -35,7 +35,8 @@ it('should save edited client', function () {
             'num' => $num,
             'complement' => $complement,
         ])
-        ->assertRedirect(route('clients.index'));
+        ->assertRedirect(route('clients.index'))
+        ->assertSessionHas('success', 'Cliente atualizado com sucesso!');
 
     $this->assertDatabaseHas('clients', [
         'id' => $client->id,

@@ -25,7 +25,8 @@ it('should save edited brand', function () {
 
     $this->actingAs($this->user)
         ->put(route('brands.update', $brand), ['name' => $name])
-        ->assertRedirect(route('brands.index'));
+        ->assertRedirect(route('brands.index'))
+        ->assertSessionHas('success', 'Marca atualizada com sucesso!');
 
     $this->assertDatabaseHas('brands', [
         'id' => $brand->id,
