@@ -13,7 +13,20 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::orderBy('name')->paginate(10);
+        return view('pages.register.clients.index', [
+            'lines' => $clients,
+            'header' => [
+                'name' => 'Nome',
+                'phone' => 'Telefone',
+
+            ],
+            'actions' => [
+                'show' => 'clients.show',
+                'edit' => 'clients.edit',
+                'delete' => 'clients.destroy'
+            ]
+        ]);
     }
 
     /**
@@ -21,7 +34,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.register.clients.create');
     }
 
     /**
@@ -29,7 +42,10 @@ class ClientController extends Controller
      */
     public function store(StoreClientRequest $request)
     {
-        //
+        Client::create($request->validated());
+
+        return redirect()->route('clients.index')
+            ->with('success', 'Cliente cadastrado com sucesso!');
     }
 
     /**
@@ -37,7 +53,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        //
+        return view('pages.register.clients.show', compact('client'));
     }
 
     /**
@@ -45,7 +61,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return view('pages.register.clients.edit', compact('client'));
     }
 
     /**
@@ -53,7 +69,10 @@ class ClientController extends Controller
      */
     public function update(UpdateClientRequest $request, Client $client)
     {
-        //
+        $client->update($request->validated());
+
+        return redirect()->route('clients.index')
+            ->with('success', 'Cliente atualizado com sucesso!');
     }
 
     /**
@@ -61,6 +80,9 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        $client->delete();
+
+        return redirect()->route('clients.index')
+            ->with('success', 'Cliente excluído com sucesso!');
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CampaignController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataFeedController;
@@ -31,6 +32,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::prefix('cadastros')->group(function(){
         Route::resource('brands', BrandController::class)->except(['show']);
         Route::resource('device_types', DeviceTypeController::class)->except(['show']);
+        Route::resource('clients', ClientController::class);
     });
 
     // Route for the getting the data feed

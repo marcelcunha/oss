@@ -19,7 +19,7 @@
         </thead>
         <!-- Table body -->
         <tbody class="text-sm font-medium divide-y divide-gray-100 dark:divide-gray-700/60">
-            @foreach ($lines as $line)
+            @forelse ($lines as $line)
                 <tr>
                     @foreach ($header as $name => $_)
                         <!-- Row -->
@@ -48,7 +48,12 @@
                         </td>
                     @endif
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan='{{ isset($actions) ? count($header) + 1 : count($header) }}' class="p-2 text-center">Não há
+                        registros para esse recurso</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 
