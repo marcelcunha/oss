@@ -18,7 +18,7 @@ class DeviceTypeController extends Controller
         return view('pages.register.device_types.index', [
             'lines' => $deviceTypes,
             'header' => ['name' => 'Name'],
-            'actions' => ['edit' => 'device_types.edit', 'delete' => 'device_types.destroy']
+            'actions' => ['edit' => 'device_types.edit', 'delete' => 'device_types.destroy'],
         ]);
     }
 
@@ -36,11 +36,10 @@ class DeviceTypeController extends Controller
     public function store(StoreDeviceTypeRequest $request)
     {
         $deviceType = DeviceType::create($request->validated());
+
         return redirect()->route('device_types.index')
             ->with('success', 'Device Type created successfully.');
     }
-
-
 
     /**
      * Show the form for editing the specified resource.
@@ -56,6 +55,7 @@ class DeviceTypeController extends Controller
     public function update(UpdateDeviceTypeRequest $request, DeviceType $deviceType)
     {
         $deviceType->update($request->validated());
+
         return redirect()->route('device_types.index')
             ->with('success', 'Device Type updated successfully.');
     }
@@ -66,6 +66,7 @@ class DeviceTypeController extends Controller
     public function destroy(DeviceType $deviceType)
     {
         $deviceType->delete();
+
         return redirect()->route('device_types.index')->with('success', 'Device Type deleted successfully.');
     }
 }

@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Brand;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
@@ -25,7 +24,7 @@ it('should save new client', function () {
             'phone' => fake()->cellphoneNumber(),
             'address' => 'Client Address',
             'num' => '123',
-            'complement' => 'Client Complement'
+            'complement' => 'Client Complement',
         ])
         ->assertRedirect(route('clients.index'));
 });
@@ -37,7 +36,7 @@ it('should not save new client without name', function () {
             'phone' => fake()->cellphoneNumber(),
             'address' => 'Client Address',
             'num' => '123',
-            'complement' => 'Client Complement'
+            'complement' => 'Client Complement',
         ])
         ->assertSessionHasErrors('name');
 });
@@ -49,7 +48,7 @@ it('should not save new client with name bigger than 60 characters', function ()
             'phone' => fake()->cellphoneNumber(),
             'address' => 'Client Address',
             'num' => '123',
-            'complement' => 'Client Complement'
+            'complement' => 'Client Complement',
         ])
         ->assertSessionHasErrors('name');
 });
@@ -61,7 +60,7 @@ it('should not save new client with phone bigger than 16 characters', function (
             'phone' => Str::random(17),
             'address' => 'Client Address',
             'num' => '123',
-            'complement' => 'Client Complement'
+            'complement' => 'Client Complement',
         ])
         ->assertSessionHasErrors('phone');
 });
@@ -73,7 +72,7 @@ it('should not save new client with address bigger than 60 characters', function
             'phone' => fake()->cellphoneNumber(),
             'address' => Str::random(61),
             'num' => '123',
-            'complement' => 'Client Complement'
+            'complement' => 'Client Complement',
         ])
         ->assertSessionHasErrors('address');
 });
@@ -85,7 +84,7 @@ it('should not save new client with num not numeric', function () {
             'phone' => fake()->cellphoneNumber(),
             'address' => 'Client Address',
             'num' => 'abc',
-            'complement' => 'Client Complement'
+            'complement' => 'Client Complement',
         ])
         ->assertSessionHasErrors('num');
 });
@@ -97,7 +96,7 @@ it('should not save new client with complement bigger than 60 characters', funct
             'phone' => fake()->cellphoneNumber(),
             'address' => 'Client Address',
             'num' => '123',
-            'complement' => Str::random(61)
+            'complement' => Str::random(61),
         ])
         ->assertSessionHasErrors('complement');
 });
@@ -109,7 +108,7 @@ it('should not save new client without phone', function () {
             'phone' => '',
             'address' => 'Client Address',
             'num' => '123',
-            'complement' => 'Client Complement'
+            'complement' => 'Client Complement',
         ])
         ->assertSessionHasErrors('phone');
 });
@@ -121,7 +120,7 @@ it('should not save new client without address and num present', function () {
             'phone' => fake()->cellphoneNumber(),
             'address' => '',
             'num' => '123',
-            'complement' => ''
+            'complement' => '',
         ])
         ->assertSessionHasErrors(['num']);
 });
@@ -133,7 +132,7 @@ it('should not save new client without address and complement present', function
             'phone' => fake()->cellphoneNumber(),
             'address' => '',
             'num' => '',
-            'complement' => 'Client Complement'
+            'complement' => 'Client Complement',
         ])
         ->assertSessionHasErrors(['complement']);
 });

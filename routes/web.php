@@ -1,18 +1,11 @@
 <?php
 
 use App\Http\Controllers\BrandController;
-use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\DeviceTypeController;
-use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\JobController;
-use App\Http\Controllers\MemberController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,7 +23,7 @@ Route::redirect('/', 'login');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
-    Route::prefix('cadastros')->group(function(){
+    Route::prefix('cadastros')->group(function () {
         Route::resource('brands', BrandController::class)->except(['show']);
         Route::resource('device_types', DeviceTypeController::class)->except(['show']);
         Route::resource('clients', ClientController::class);

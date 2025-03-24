@@ -29,25 +29,25 @@ it('should save edited brand', function () {
 
     $this->assertDatabaseHas('brands', [
         'id' => $brand->id,
-        'name' => $name
+        'name' => $name,
     ]);
 });
 
-it('should fail if name is empty on edit', function(){
+it('should fail if name is empty on edit', function () {
     $brand = Brand::factory()->create();
     $this->actingAs($this->user)
         ->put(route('brands.update', $brand), ['name' => ''])
         ->assertSessionHasErrors('name');
 });
 
-it('should fail if name is too long on edit', function(){
+it('should fail if name is too long on edit', function () {
     $brand = Brand::factory()->create();
     $this->actingAs($this->user)
         ->put(route('brands.update', $brand), ['name' => Str::random(31)])
         ->assertSessionHasErrors('name');
 });
 
-it('should fail if name is not unique on edit', function(){
+it('should fail if name is not unique on edit', function () {
     $brand1 = Brand::factory()->create();
     $brand2 = Brand::factory()->create();
     $this->actingAs($this->user)

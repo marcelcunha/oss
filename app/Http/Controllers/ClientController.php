@@ -14,6 +14,7 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::orderBy('name')->paginate(10);
+
         return view('pages.register.clients.index', [
             'lines' => $clients,
             'header' => [
@@ -24,8 +25,8 @@ class ClientController extends Controller
             'actions' => [
                 'show' => 'clients.show',
                 'edit' => 'clients.edit',
-                'delete' => 'clients.destroy'
-            ]
+                'delete' => 'clients.destroy',
+            ],
         ]);
     }
 

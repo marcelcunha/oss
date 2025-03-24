@@ -23,7 +23,7 @@ class BrandSeeder extends Seeder
             ['name' => 'HP'],
             ['name' => 'Avell'],
             ['name' => 'Compaq'],
-            ['name' => 'Lenovo']
+            ['name' => 'Lenovo'],
         ]);
     }
 }

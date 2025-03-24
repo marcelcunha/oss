@@ -17,8 +17,8 @@ class DeviceController extends Controller
     public function index()
     {
         $devices = Device::query()
-        ->with(['client', 'type', 'brand'])
-        ->paginate(10);
+            ->with(['client', 'type', 'brand'])
+            ->paginate(10);
 
         return view('pages.register.devices.index', [
             'lines' => $devices,
@@ -26,7 +26,7 @@ class DeviceController extends Controller
                 'client.name' => 'Proprietário',
                 'type.name' => 'Tipo',
                 'brand.name' => 'Marca',
-                'model' => 'Modelo'
+                'model' => 'Modelo',
             ],
             'actions' => [
                 'show' => 'devices.show',
@@ -53,7 +53,7 @@ class DeviceController extends Controller
      */
     public function store(StoreDeviceRequest $request)
     {
-       
+
         Device::create($request->validated());
 
         return redirect()->route('devices.index')

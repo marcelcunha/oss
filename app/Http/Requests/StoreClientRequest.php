@@ -26,7 +26,7 @@ class StoreClientRequest extends FormRequest
             'phone' => ['required', 'max:16', 'min:14'],
             'address' => ['nullable', 'max:60'],
             'num' => ['required_with:address', 'prohibited_if:address,null', 'nullable', 'numeric'],
-            'complement' => ['nullable', 'max:60', 'prohibited_if:address,null',],
+            'complement' => ['nullable', 'max:60', 'prohibited_if:address,null'],
         ];
     }
 }

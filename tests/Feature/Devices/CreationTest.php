@@ -6,7 +6,7 @@ use App\Models\DeviceType;
 use App\Models\User;
 use Illuminate\Support\Str;
 
-beforeEach(fn() => $this->user = User::factory()->create());
+beforeEach(fn () => $this->user = User::factory()->create());
 
 it('should open create device page', function () {
     $this->actingAs($this->user)
@@ -67,7 +67,6 @@ it('should not save new device without brand', function () {
         ->assertSessionHasErrors('brand_id');
 });
 
-
 it('should not save new device with model bigger than 50 characters', function () {
     $this->actingAs($this->user)
         ->post(route('devices.store'), [
@@ -107,4 +106,3 @@ it('should not save new device with service tag bigger than 30 characters', func
         ])
         ->assertSessionHasErrors('service_tag');
 });
-

@@ -16,9 +16,9 @@ class BrandController extends Controller
         $brands = Brand::orderBy('name')->paginate(10);
 
         return view('pages.register.brands.index', [
-            'header' => ['name' => 'Nome'], 
+            'header' => ['name' => 'Nome'],
             'lines' => $brands,
-            'actions' => ['edit' => 'brands.edit', 'delete' => 'brands.destroy']
+            'actions' => ['edit' => 'brands.edit', 'delete' => 'brands.destroy'],
         ]);
     }
 

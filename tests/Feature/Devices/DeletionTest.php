@@ -3,7 +3,7 @@
 use App\Models\Device;
 use App\Models\User;
 
-beforeEach( fn() => $this->user = User::factory()->create() );
+beforeEach(fn () => $this->user = User::factory()->create());
 
 it('should delete a device', function () {
     $device = Device::factory()->create();

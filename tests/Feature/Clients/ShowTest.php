@@ -3,7 +3,7 @@
 use App\Models\Client;
 use App\Models\User;
 
-beforeEach(fn() => $this->user = User::factory()->create());
+beforeEach(fn () => $this->user = User::factory()->create());
 
 it('should show a client', function () {
     $client = Client::factory()->create();

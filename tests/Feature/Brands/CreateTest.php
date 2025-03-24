@@ -11,33 +11,33 @@ beforeEach(function () {
     $this->user = User::factory()->create();
 });
 
-it('should open create brand page', function(){
+it('should open create brand page', function () {
     $this->actingAs($this->user)
-    ->get(route('brands.create'))
-    ->assertStatus(200);
+        ->get(route('brands.create'))
+        ->assertStatus(200);
 });
 
-it('should save new brand', function(){
+it('should save new brand', function () {
     $this->actingAs($this->user)
-    ->post(route('brands.store'),['name' => fake()->company()])
-    ->assertRedirect(route('brands.index'));
+        ->post(route('brands.store'), ['name' => fake()->company()])
+        ->assertRedirect(route('brands.index'));
 });
 
-it('should fail if name is empty', function(){
+it('should fail if name is empty', function () {
     $this->actingAs($this->user)
-    ->post(route('brands.store'),['name' => ''])
-    ->assertSessionHasErrors('name');
+        ->post(route('brands.store'), ['name' => ''])
+        ->assertSessionHasErrors('name');
 });
 
-it('should fail if name is too long', function(){
+it('should fail if name is too long', function () {
     $this->actingAs($this->user)
-    ->post(route('brands.store'),['name' => Str::random(31)])
-    ->assertSessionHasErrors('name');
+        ->post(route('brands.store'), ['name' => Str::random(31)])
+        ->assertSessionHasErrors('name');
 });
 
-it('should fail if name is not unique', function(){
+it('should fail if name is not unique', function () {
     $brand = Brand::factory()->create();
     $this->actingAs($this->user)
-    ->post(route('brands.store'),['name' => $brand->name])
-    ->assertSessionHasErrors('name');
+        ->post(route('brands.store'), ['name' => $brand->name])
+        ->assertSessionHasErrors('name');
 });

@@ -21,17 +21,17 @@ class Device extends Model
         'description',
     ];
 
-    public function client() : BelongsTo
+    public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);
     }
 
-    public function type() : BelongsTo
+    public function type(): BelongsTo
     {
         return $this->belongsTo(DeviceType::class, 'type_id');
     }
 
-    public function brand() : BelongsTo
+    public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
     }

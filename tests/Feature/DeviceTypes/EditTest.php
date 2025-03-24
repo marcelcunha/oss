@@ -29,25 +29,25 @@ it('should save edited device type', function () {
 
     $this->assertDatabaseHas('device_types', [
         'id' => $type->id,
-        'name' => $name
+        'name' => $name,
     ]);
 });
 
-it('should fail if name is empty on edit', function(){
+it('should fail if name is empty on edit', function () {
     $type = DeviceType::factory()->create();
     $this->actingAs($this->user)
         ->put(route('device_types.update', $type), ['name' => ''])
         ->assertSessionHasErrors('name');
 });
 
-it('should fail if name is too long on edit', function(){
+it('should fail if name is too long on edit', function () {
     $type = DeviceType::factory()->create();
     $this->actingAs($this->user)
         ->put(route('device_types.update', $type), ['name' => Str::random(31)])
         ->assertSessionHasErrors('name');
 });
 
-it('should fail if name is not unique on edit', function(){
+it('should fail if name is not unique on edit', function () {
     $type1 = DeviceType::factory()->create();
     $type2 = DeviceType::factory()->create();
     $this->actingAs($this->user)
