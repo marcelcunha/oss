@@ -1,3 +1,9 @@
+@php
+// session()->put('success', 'This is a success message');
+    $types = collect(['success', 'danger', 'warning', 'info']);
+    
+    $type = $types->first(fn( $type) => session()->has($type));
+    @endphp
 <x-app-layout>
 
     <div class="py-4 px-8">
@@ -19,5 +25,11 @@
 
         </div>
         {{ $slot }}
+
     </div>
+    @if ($type)
+    <x-action-message :type="$type">
+        {{ session()->get($type) }}
+    </x-action-message>
+    @endif
 </x-app-layout>

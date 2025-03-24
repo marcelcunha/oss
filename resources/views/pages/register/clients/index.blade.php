@@ -33,8 +33,5 @@
             </form>
         </x-modal>
 
-<x-action-message on="saved">
-    
-</x-action-message>
     </div>
 </x-pages.index>

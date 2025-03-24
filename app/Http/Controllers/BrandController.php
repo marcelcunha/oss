@@ -37,7 +37,8 @@ class BrandController extends Controller
     {
         Brand::create($request->validated());
 
-        return redirect()->route('brands.index');
+        return redirect()->route('brands.index')
+            ->with('success', 'Marca cadastrada com sucesso!');
     }
 
     /**
@@ -55,7 +56,8 @@ class BrandController extends Controller
     {
         $brand->update($request->validated());
 
-        return redirect()->route('brands.index')->with('success', 'Marca atualizada com sucesso!');
+        return redirect()->route('brands.index')
+            ->with('success', 'Marca atualizada com sucesso!');
     }
 
     /**

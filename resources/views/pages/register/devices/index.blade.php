@@ -30,4 +30,5 @@
         </x-modal>
 
     </div>
+
 </x-pages.index>
