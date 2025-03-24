@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             DashboardTableSeeder::class,
             BrandSeeder::class,
             DeviceTypeSeeder::class,
+            ClientSeeder::class,
         ]);
     }
 }

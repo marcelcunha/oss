@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataFeedController;
+use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\DeviceTypeController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\JobController;
@@ -33,6 +34,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::resource('brands', BrandController::class)->except(['show']);
         Route::resource('device_types', DeviceTypeController::class)->except(['show']);
         Route::resource('clients', ClientController::class);
+        Route::resource('devices', DeviceController::class);
     });
 
     // Route for the getting the data feed

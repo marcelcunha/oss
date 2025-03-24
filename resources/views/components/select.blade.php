@@ -5,7 +5,7 @@
         @empty($options)
             {{ $slot }}
         @else
-            @if (filled($placeholder))
+            @if (filled($placeholder) && !$value)
                 <option >{{ $placeholder }}</option>
             @endif
 

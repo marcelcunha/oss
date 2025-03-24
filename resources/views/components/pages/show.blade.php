@@ -21,7 +21,7 @@
 
             <x-slot:footer>
                 <div class='flex justify-end'>
-                    <x-button :href="route('clients.index')">
+                    <x-button :href="$backRoute">
                         Voltar
                     </x-button>
 

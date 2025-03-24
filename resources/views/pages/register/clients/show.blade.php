@@ -1,4 +1,4 @@
-<x-pages.show title='Cliente' :subtitle='$client->name'>
+<x-pages.show title='Cliente' :subtitle='$client->name' :backRoute="route('clients.index')">
    
         <div class="grid lg:grid-cols-8 2xl:grid-cols-10 gap-x-4 gap-y-6" x-data>
             <x-input-text readonly value="{{ $client?->name }}" label='Nome' name='name' parent-class='lg:col-span-6 2xl:col-span-8' />

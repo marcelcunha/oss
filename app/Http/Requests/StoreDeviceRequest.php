@@ -11,7 +11,7 @@ class StoreDeviceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,13 @@ class StoreDeviceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'client_id' => ['required', 'integer', 'exists:clients,id'],
+            'type_id' => ['required', 'integer', 'exists:device_types,id'],
+            'brand_id' => ['required', 'integer', 'exists:brands,id'],
+            'model' => ['nullable', 'string', 'max:50'],
+            'serial_number' => ['nullable', 'string', 'max:50', 'unique:devices,serial_number'],
+            'service_tag' => ['nullable', 'string', 'max:30', 'unique:devices,service_tag'],
+            'description' => ['nullable', 'string'],
         ];
     }
 }

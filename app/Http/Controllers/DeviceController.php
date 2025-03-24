@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDeviceRequest;
 use App\Http\Requests\UpdateDeviceRequest;
+use App\Models\Brand;
+use App\Models\Client;
 use App\Models\Device;
+use App\Models\DeviceType;
 
 class DeviceController extends Controller
 {
@@ -13,7 +16,19 @@ class DeviceController extends Controller
      */
     public function index()
     {
-        //
+        $devices = Device::paginate(10);
+
+        return view('pages.register.devices.index', [
+            'lines' => $devices,
+            'header' => [
+                'client.name' => 'Proprietário',
+            ],
+            'actions' => [
+                'show' => 'devices.show',
+                'edit' => 'devices.edit',
+                'delete' => 'devices.destroy',
+            ],
+        ]);
     }
 
     /**
@@ -21,7 +36,11 @@ class DeviceController extends Controller
      */
     public function create()
     {
-        //
+        $clients = Client::orderBy('name')->pluck('name', 'id');
+        $types = DeviceType::orderBy('name')->pluck('name', 'id');
+        $brands = Brand::orderBy('name')->pluck('name', 'id');
+
+        return view('pages.register.devices.create', compact('clients', 'types', 'brands'));
     }
 
     /**
@@ -29,7 +48,11 @@ class DeviceController extends Controller
      */
     public function store(StoreDeviceRequest $request)
     {
-        //
+       
+        Device::create($request->validated());
+
+        return redirect()->route('devices.index')
+            ->with('success', 'Equipamento cadastrado com sucesso!');
     }
 
     /**
@@ -37,7 +60,7 @@ class DeviceController extends Controller
      */
     public function show(Device $device)
     {
-        //
+        return view('pages.register.devices.show', compact('device'));
     }
 
     /**
@@ -45,7 +68,11 @@ class DeviceController extends Controller
      */
     public function edit(Device $device)
     {
-        //
+        $clients = Client::orderBy('name')->pluck('name', 'id');
+        $types = DeviceType::orderBy('name')->pluck('name', 'id');
+        $brands = Brand::orderBy('name')->pluck('name', 'id');
+
+        return view('pages.register.devices.edit', compact('device', 'clients', 'types', 'brands'));
     }
 
     /**
@@ -53,7 +80,10 @@ class DeviceController extends Controller
      */
     public function update(UpdateDeviceRequest $request, Device $device)
     {
-        //
+        $device->update($request->validated());
+
+        return redirect()->route('devices.index')
+            ->with('success', 'Equipamento atualizado com sucesso!');
     }
 
     /**
@@ -61,6 +91,9 @@ class DeviceController extends Controller
      */
     public function destroy(Device $device)
     {
-        //
+        $device->delete();
+
+        return redirect()->route('devices.index')
+            ->with('success', 'Equipamento excluído com sucesso!');
     }
 }

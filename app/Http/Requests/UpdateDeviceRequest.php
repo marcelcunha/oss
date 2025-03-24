@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateDeviceRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateDeviceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,13 @@ class UpdateDeviceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'client_id' => ['required', 'integer', 'exists:clients,id'],
+            'type_id' => ['required', 'integer', 'exists:device_types,id'],
+            'brand_id' => ['required', 'integer', 'exists:brands,id'],
+            'model' => ['nullable', 'string', 'max:50'],
+            'serial_number' => ['nullable', 'string', 'max:50', Rule::unique('devices', 'serial_number')->ignore($this->device)],
+            'service_tag' => ['nullable', 'string', 'max:30', Rule::unique('devices', 'service_tag')->ignore($this->device)],
+            'description' => ['nullable', 'string'],
         ];
     }
 }
