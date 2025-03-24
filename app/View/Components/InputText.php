@@ -12,7 +12,7 @@ class InputText extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public string $label, public ?string $name = null, public ?string $id)
+    public function __construct(public string $label, public ?string $name = null, public ?string $id, public ?string $parentClass = null)
     {
         $this->name = $this->name ?? Str::snake($this->label);
         $this->id = $this->id ?? $this->name;
