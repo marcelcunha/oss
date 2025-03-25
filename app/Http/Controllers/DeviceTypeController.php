@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDeviceTypeRequest;
 use App\Http\Requests\UpdateDeviceTypeRequest;
 use App\Models\DeviceType;
+use Illuminate\Database\QueryException;
 
 class DeviceTypeController extends Controller
 {
@@ -65,8 +66,21 @@ class DeviceTypeController extends Controller
      */
     public function destroy(DeviceType $deviceType)
     {
-        $deviceType->delete();
+        try {
+            $deviceType->delete();
 
-        return redirect()->route('device_types.index')->with('success', 'Device Type deleted successfully.');
+            return redirect()->route('device_types.index')
+                ->with('success', 'Tipo de dispositivo excluído com sucesso!');
+        } catch (QueryException $e) {
+            report($e);
+            
+            return redirect()->route('device_types.index')
+                ->with('error', 'Tipo de dispositivo não pode ser excluído, pois está associado a um dispositivo.');
+        } catch (\Exception $e) {
+            report($e);
+
+            return redirect()->route('device_types.index')
+                ->with('error', 'Tipo de dispositivo não pode ser excluído.');
+        }
     }
 }

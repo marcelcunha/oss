@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
+use Illuminate\Database\QueryException;
 
 class ClientController extends Controller
 {
@@ -81,9 +82,22 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        $client->delete();
+        try{
+            $client->delete();
+    
+            return redirect()->route('clients.index')
+                ->with('success', 'Cliente excluído com sucesso!');
+        }catch(QueryException $e){
+            report($e);
 
-        return redirect()->route('clients.index')
-            ->with('success', 'Cliente excluído com sucesso!');
+            return redirect()->route('clients.index')
+                ->with('error', 'Cliente não pode ser excluído, pois está associado a um dispositivo.');
+        }
+        catch(\Exception $e){
+            report($e);
+
+            return redirect()->route('clients.index')
+                ->with('error', 'Cliente não pôde ser excluído.');
+        }
     }
 }

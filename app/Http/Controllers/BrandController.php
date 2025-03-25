@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
 use App\Models\Brand;
+use Illuminate\Database\QueryException;
 
 class BrandController extends Controller
 {
@@ -65,8 +66,15 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        $brand->delete();
-
-        return redirect()->route('brands.index')->with('success', 'Marca excluída com sucesso!');
+        try {
+            $brand->delete();
+            return redirect()->route('brands.index')->with('success', 'Marca excluída com sucesso.');
+        } catch (QueryException $e) {
+            report($e);
+            return redirect()->route('brands.index')->with('error', 'Marca não pode ser excluída, pois está associada a um dispositivo.');
+        } catch (\Exception $e) {
+            report($e);
+            return redirect()->route('brands.index')->with('error', 'Marca não pode ser excluída.');
+        }
     }
 }

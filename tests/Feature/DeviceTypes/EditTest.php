@@ -21,7 +21,7 @@ it('should open edit device type page', function () {
 
 it('should save edited device type', function () {
     $type = DeviceType::factory()->create();
-    $name = fake()->words(asText: true);
+    $name = fake()->words(1, asText: true);
 
     $this->actingAs($this->user)
         ->put(route('device_types.update', $type), ['name' => $name])
