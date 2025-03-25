@@ -17,7 +17,7 @@ class Select extends Component
         public string $label,
         public ?string $name = null,
         public ?string $id = null,
-        public string $placeholder = '',
+        public string $placeholder = 'Selecione',
         public Collection|array $options = [],
         public ?string $parentClass = null,
         public ?string $value = null,
