@@ -1,6 +1,5 @@
 @php
-// session()->put('success', 'This is a success message');
-    $types = collect(['success', 'danger', 'warning', 'info']);
+    $types = collect(['success', 'error', 'warning', 'info']);
     
     $type = $types->first(fn( $type) => session()->has($type));
     @endphp

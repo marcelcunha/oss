@@ -30,19 +30,19 @@
                     @if (isset($actions))
                         <td class="whitespace-nowrap">
                             @if (array_key_exists('show', $actions))
-                                <x-button :href="route(data_get($actions, 'show'), $line->id)" class="bg-white hover:bg-white border-gray-200 btn-sm">
-                                    <x-heroicon-o-eye class="h-5 w-5 text-gray-200" />
+                                <x-button :href="route(data_get($actions, 'show'), $line->id)" class="h-7 w-7" color=secondary btn='btn-xs'>
+                                    <x-heroicon-o-eye class=" text-gray-300" />
                                 </x-button>
                             @endif
                             @if (array_key_exists('edit', $actions))
-                                <x-button :href="route(data_get($actions, 'edit'), $line->id)" class="bg-white hover:bg-white border-gray-200 btn-sm">
-                                    <x-heroicon-o-pencil class="h-5 w-5 text-gray-200" />
+                                <x-button :href="route(data_get($actions, 'edit'), $line->id)" class="h-7 w-7" color=secondary btn='btn-xs'>
+                                    <x-heroicon-o-pencil class=" text-gray-300" />
                                 </x-button>
                             @endif
                             @if (array_key_exists('delete', $actions))
-                                <x-button class="bg-white hover:bg-white border-gray-200 btn-sm"
+                                <x-button class="h-7 w-7" color=secondary btn='btn-xs'
                                     @click="show=true;name='{{ $line->name }}';route='{{ route(data_get($actions, 'delete'), $line->id) }}'">
-                                    <x-heroicon-o-trash class="h-5 w-5 text-gray-200" />
+                                    <x-heroicon-o-trash class="text-gray-300" />
                                 </x-button>
                             @endif
                         </td>

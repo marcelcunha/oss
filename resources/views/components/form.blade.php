@@ -13,7 +13,7 @@
                     {{ $actionButtons }}
                 @else
                     <x-button :href="$cancelRoute"
-                        class='bg-white text-gray-900 border-gray-100 hover:bg-white hover:text-gray-900 hover:border-gray-200'>
+                        color='secondary'>
                         Cancelar
                     </x-button>
                     <x-button type='submit'>

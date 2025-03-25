@@ -1,11 +1,24 @@
+@props(['color' => 'primary', 
+'type' => 'button',
+ 'href' => null,
+ 'btn' => 'btn'])
+@php
+    $format = match ($color) {
+        'primary' => 'btn-primary',
+        'secondary' => 'btn-secondary',
+        'danger' => 'btn-danger',
+        'success' => 'btn-success',
+        'warning' => 'btn-warning',
+        'info' => 'btn-info',
+        default => '',
+    };
+@endphp
 @if (isset($href))
-    <a href="{{ $href }}"
-        {{ $attributes->except('type')->merge(['class' => ' btn bg-gray-900 text-gray-100 hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-800 dark:hover:bg-white whitespace-nowrap']) }}>
+    <a href="{{ $href }}" {{ $attributes->except(['type', 'color', 'btn'])->merge(['class' => "{$btn} {$format}"]) }}>
         {{ $slot }}
     </a>
 @else
-    <button type="{{ $type }}"
-        {{ $attributes->merge(['class' => 'cursor-pointer btn bg-gray-900 text-gray-100 hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-800 dark:hover:bg-white whitespace-nowrap']) }}>
+    <button type="{{ $type }}" {{ $attributes->except('btn')->merge(['class' => "cursor-pointer {$btn} {$format}"]) }}>
         {{ $slot }}
     </button>
 @endisset
