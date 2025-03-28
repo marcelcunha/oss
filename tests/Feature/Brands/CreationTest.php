@@ -42,3 +42,15 @@ it('should fail if name is not unique', function () {
         ->post(route('brands.store'), ['name' => $brand->name])
         ->assertSessionHasErrors('name');
 });
+
+it('should fail if categories is not an array', function () {
+    $this->actingAs($this->user)
+        ->post(route('brands.store'), ['name' => fake()->company(), 'categories' => 'not-an-array'])
+        ->assertSessionHasErrors('categories');
+});
+
+it('should fail if categories is not distinct', function () {
+    $this->actingAs($this->user)
+        ->post(route('brands.store'), ['name' => fake()->company(), 'categories' => ['a', 'b', 'a']])
+        ->assertSessionHasErrors('categories.*');
+});

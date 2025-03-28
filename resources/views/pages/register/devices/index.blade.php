@@ -6,10 +6,14 @@
             </x-button>
         </x-slot>
         <x-card label="Equipamentos">
-            <x-table :header="$header" :lines="$lines" :actions="$actions" />
-            <x-slot name='footer'>
-                {{ $lines->links() }}
-            </x-slot>
+
+            <x-table :$columns :$rows :actions="$actions" />
+
+            @if ($rows->hasPages())
+                <x-slot name='footer'>
+                    {{ $rows->links() }}
+                </x-slot>
+            @endif
         </x-card>
 
         <x-modal id='deleteModal'>
@@ -22,8 +26,8 @@
                     <p>Tem certeza que deseja excluir o equipamento: <span x-text='name' class='font-bold'></span>?</p>
 
                     <x-slot name='footer'>
-                        <x-button class="bg-red-500" @click="show = false">Cancelar</x-button>
-                        <x-button class="bg-green-500" type=submit>Excluir</x-button>
+                        <x-button class="btn-secondary" @click="show = false">Cancelar</x-button>
+                        <x-button class="btn-primary" type=submit>Excluir</x-button>
                     </x-slot>
                 </x-card>
             </form>

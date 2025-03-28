@@ -9,7 +9,7 @@ beforeEach(function () {
     $this->user = User::factory()->create();
 });
 
-it('shows brands list', function () {
+it('shows device_type list page', function () {
     $response = $this->actingAs($this->user)->get(route('device_types.index'));
 
     $response->assertStatus(200)

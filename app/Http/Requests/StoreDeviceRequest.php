@@ -31,4 +31,17 @@ class StoreDeviceRequest extends FormRequest
             'description' => ['nullable', 'string'],
         ];
     }
+
+    public function attributes() :array
+    {
+        return [
+            'client_id' => 'cliente',
+            'type_id' => 'tipo',
+            'brand_id' => 'marca',
+            'model' => 'modelo',
+            'serial_number' => 'número de série',
+            'service_tag' => 'service tag',
+            'description' => 'descrição',
+        ];
+    }
 }

@@ -23,6 +23,8 @@ class StoreBrandRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:30', 'unique:brands'],
+            'categories' => ['nullable', 'array'],
+            'categories.*' => ['string', 'max:20', 'distinct'],
         ];
     }
 }

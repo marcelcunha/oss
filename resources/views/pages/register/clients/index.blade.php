@@ -6,10 +6,10 @@
             </x-button>
         </x-slot>
         <x-card label="Clientes">
-            <x-table :header="$header" :lines="$lines" :actions="$actions" />
-            @if ($lines->hasPages())
+            <x-table :$columns :$rows :actions="$actions" />
+            @if ($rows->hasPages())
                 <x-slot name='footer'>
-                    {{ $lines->links() }}
+                    {{ $rows->links() }}
                 </x-slot>
                 
             @endif

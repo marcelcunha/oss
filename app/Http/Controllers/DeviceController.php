@@ -21,8 +21,8 @@ class DeviceController extends Controller
             ->paginate(10);
 
         return view('pages.register.devices.index', [
-            'lines' => $devices,
-            'header' => [
+            'rows' => $devices,
+            'columns' => [
                 'client.name' => 'Proprietário',
                 'type.name' => 'Tipo',
                 'brand.name' => 'Marca',
