@@ -6,9 +6,9 @@
             </x-button>
         </x-slot>
         <x-card label="Equipamentos">
-            <x-table :header="$header" :lines="$lines" :actions="$actions" />
+            <x-table :$columns $rows :actions="$actions" />
             <x-slot name='footer'>
-                {{ $lines->links() }}
+                {{ $rows->links() }}
             </x-slot>
         </x-card>
 

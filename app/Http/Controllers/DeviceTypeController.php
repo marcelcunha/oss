@@ -17,8 +17,8 @@ class DeviceTypeController extends Controller
         $deviceTypes = DeviceType::orderBy('name')->paginate(10);
 
         return view('pages.register.device_types.index', [
-            'lines' => $deviceTypes,
-            'header' => ['name' => 'Name'],
+            'rows' => $deviceTypes,
+            'columns' => ['name' => 'Name'],
             'actions' => ['edit' => 'device_types.edit', 'delete' => 'device_types.destroy'],
         ]);
     }
@@ -73,7 +73,7 @@ class DeviceTypeController extends Controller
                 ->with('success', 'Tipo de dispositivo excluído com sucesso!');
         } catch (QueryException $e) {
             report($e);
-            
+
             return redirect()->route('device_types.index')
                 ->with('error', 'Tipo de dispositivo não pode ser excluído, pois está associado a um dispositivo.');
         } catch (\Exception $e) {

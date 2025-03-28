@@ -17,8 +17,8 @@ class ClientController extends Controller
         $clients = Client::orderBy('name')->paginate(10);
 
         return view('pages.register.clients.index', [
-            'lines' => $clients,
-            'header' => [
+            'rows' => $clients,
+            'columns' => [
                 'name' => 'Nome',
                 'phone' => 'Telefone',
 
@@ -82,18 +82,17 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        try{
+        try {
             $client->delete();
-    
+
             return redirect()->route('clients.index')
                 ->with('success', 'Cliente excluído com sucesso!');
-        }catch(QueryException $e){
+        } catch (QueryException $e) {
             report($e);
 
             return redirect()->route('clients.index')
                 ->with('error', 'Cliente não pode ser excluído, pois está associado a um dispositivo.');
-        }
-        catch(\Exception $e){
+        } catch (\Exception $e) {
             report($e);
 
             return redirect()->route('clients.index')
