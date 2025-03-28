@@ -1,5 +1,5 @@
 @props(['submitButton' => 'Salvar', 'action', 'cancelRoute','update' => false])
-<form action="{{ $action }}" method="post">
+<form action="{{ $action }}" method="post" {{ $attributes }}>
     <x-card>
         @csrf
         @if ($update)
