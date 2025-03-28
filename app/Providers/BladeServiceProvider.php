@@ -27,10 +27,9 @@ class BladeServiceProvider extends ServiceProvider
     public function registerScopeDirective(): void
     {
         /**
-         * All credits from this blade directive goes to Konrad Kalemba.
-         * Just copied and modified for my very specific use case.
-         *
-         * https://github.com/konradkalemba/blade-components-scoped-slots
+         * Copiado do repositório MaryUi
+         * 
+         * https://github.com/robsontenorio/mary
          */
         Blade::directive('scope', function ($expression) {
             // Split the expression by `top-level` commas (not in parentheses)

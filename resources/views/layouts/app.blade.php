@@ -58,6 +58,7 @@
         </div>
 
     </div>
+
     @yield('js')
     <script>
         document.addEventListener('alpine:init', () => {

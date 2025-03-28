@@ -24,6 +24,8 @@ class UpdateBrandRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:30', Rule::unique('brands')->ignore($this->brand)],
+            'categories' => ['nullable', 'array'],
+            'categories.*' => ['string', 'max:20', 'distinct'],
         ];
     }
 }

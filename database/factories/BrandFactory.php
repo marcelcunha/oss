@@ -18,6 +18,18 @@ class BrandFactory extends Factory
     {
         return [
             'name' => $this->faker->company(),
+            'categories' => $this->faker->optional(0.6)->randomElements([
+                'electronics',
+                'furniture',
+                'clothing',
+                'toys',
+                'books',
+                'sports',
+                'automotive',
+                'health',
+                'beauty',
+                'food',
+            ], rand(1, 5)),
         ];
     }
 }
