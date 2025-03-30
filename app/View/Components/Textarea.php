@@ -17,9 +17,14 @@ class Textarea extends Component
         public ?string $name = null,
         public ?string $id = null,
         public ?string $parentClass = null,
+        public bool $required = false,
     ) {
         $this->name = $this->name ?? Str::snake($this->label);
         $this->id = $this->id ?? $this->name;
+
+        if($required){
+            $this->label = $this->label . ' *';
+        }
     }
 
     /**

@@ -21,12 +21,17 @@ class Select extends Component
         public Collection|array $options = [],
         public ?string $parentClass = null,
         public ?string $value = null,
+        public bool $required = false,
     ) {
         $this->name = $this->name ?? Str::snake($this->label);
         $this->id = $this->id ?? $this->name;
 
         if ($this->options instanceof Collection) {
             $this->options = $this->options->toArray();
+        }
+
+        if ($this->required) {
+            $this->label = $this->label . ' *';
         }
     }
 
