@@ -5,9 +5,8 @@ namespace App\View\Components;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
-use Illuminate\View\Component;
 
-class InputText extends Component
+class InputText extends AbstractInput
 {
     /**
      * Create a new component instance.
@@ -29,4 +28,6 @@ class InputText extends Component
     {
         return view('components.input-text');
     }
+
+
 }

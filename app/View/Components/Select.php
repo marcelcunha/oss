@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
-class Select extends Component
+class Select extends AbstractInput
 {
     /**
      * Create a new component instance.

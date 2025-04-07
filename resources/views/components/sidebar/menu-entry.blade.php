@@ -9,7 +9,8 @@
     >
         <div class="flex items-center justify-between">
             <div class="flex items-center">
-                <x-heroicon-o-arrow-left/>
+                <x-dynamic-component :component="'heroicon-o-'.$icon" class="h-4" />
+
                 <span
                     class="lg:sidebar-expanded:opacity-100 ml-4 text-sm font-medium duration-200 lg:opacity-0 2xl:opacity-100"
                 >{{$label}}</span>

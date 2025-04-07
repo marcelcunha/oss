@@ -7,7 +7,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
-class Textarea extends Component
+class Textarea extends AbstractInput
 {
     /**
      * Create a new component instance.
