@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('brands');
+    }
+
+    /**
      * Run the migrations.
      */
     public function up(): void
@@ -20,49 +28,40 @@ return new class extends Migration
         });
 
         $brands = [
-            ['name' => 'Dell', 'categories' => json_encode(['Laptop', 'Desktop'])],
-            ['name' => 'Lenovo', 'categories' => json_encode(['Laptop', 'Desktop'])],
-            ['name' => 'Acer', 'categories' => json_encode(['Laptop', 'Desktop'])],
-            ['name' => 'Asus', 'categories' => json_encode(['Laptop', 'Desktop', 'Placa Mãe', 'GPU'])],
-            ['name' => 'Apple', 'categories' => json_encode(['Laptop', 'Desktop'])],
-            ['name' => 'Samsung', 'categories' => json_encode(['Laptop', 'Celular', 'Armazenamento'])],
-            ['name' => 'Avell', 'categories' => json_encode(['Laptop'])],
-            ['name' => 'Compaq', 'categories' => json_encode(['Laptop', 'Desktop'])],
-            ['name' => 'HP', 'categories' => json_encode(['Laptop', 'Desktop'])],
-            ['name' => 'Intel', 'categories' => json_encode(['CPU', 'GPU'])],
-            ['name' => 'AMD', 'categories' => json_encode(['CPU'])],
-            ['name' => 'NVIDIA', 'categories' => json_encode(['GPU'])],
-            ['name' => 'MSI', 'categories' => json_encode(['GPU'])],
-            ['name' => 'Gigabyte', 'categories' => json_encode(['GPU'])],
-            ['name' => 'EVGA', 'categories' => json_encode(['GPU'])],
-            ['name' => 'ASRock', 'categories' => json_encode(['Placa Mãe'])],
-            ['name' => 'Biostar', 'categories' => json_encode(['Placa Mãe'])],
-            ['name' => 'Corsair', 'categories' => json_encode(['Memória', 'Armazenamento'])],
-            ['name' => 'Kingston', 'categories' => json_encode(['Memória', 'Armazenamento'])],
-            ['name' => 'Crucial', 'categories' => json_encode(['Memória', 'Armazenamento'])],
-            ['name' => 'Western Digital', 'categories' => json_encode(['Armazenamento'])],
-            ['name' => 'Seagate', 'categories' => json_encode(['Armazenamento'])],
-            ['name' => 'Toshiba', 'categories' => json_encode(['Armazenamento'])],
-            ['name' => 'SanDisk', 'categories' => json_encode(['Armazenamento'])],
-            ['name' => 'ADATA', 'categories' => json_encode(['Armazenamento'])],
-            ['name' => 'Patriot', 'categories' => json_encode(['Armazenamento'])],
-            ['name' => 'ZOTAC', 'categories' => json_encode(['GPU'])],
-            ['name' => 'HyperX', 'categories' => json_encode(['Memória', 'Periféricos'])],
-            ['name' => 'Cooler Master', 'categories' => json_encode(['Fonte'])],
-            ['name' => 'EVGA', 'categories' => json_encode(['Fonte'])],
-            ['name' => 'Corsair', 'categories' => json_encode(['Fonte'])],
+            ['name' => 'Dell', 'categories' => json_encode(['laptop', 'desktop'])],
+            ['name' => 'Lenovo', 'categories' => json_encode(['laptop', 'desktop'])],
+            ['name' => 'Acer', 'categories' => json_encode(['laptop', 'desktop'])],
+            ['name' => 'Asus', 'categories' => json_encode(['laptop', 'desktop', 'mobo', 'gpu'])],
+            ['name' => 'Apple', 'categories' => json_encode(['laptop', 'desktop'])],
+            ['name' => 'Samsung', 'categories' => json_encode(['laptop', 'storage'])],
+            ['name' => 'Avell', 'categories' => json_encode(['laptop'])],
+            ['name' => 'Compaq', 'categories' => json_encode(['laptop', 'desktop'])],
+            ['name' => 'HP', 'categories' => json_encode(['laptop', 'desktop'])],
+            ['name' => 'Intel', 'categories' => json_encode(['cpu', 'gpu'])],
+            ['name' => 'AMD', 'categories' => json_encode(['cpu'])],
+            ['name' => 'NVIDIA', 'categories' => json_encode(['gpu'])],
+            ['name' => 'MSI', 'categories' => json_encode(['gpu'])],
+            ['name' => 'Gigabyte', 'categories' => json_encode(['gpu', 'mobo'])],
+            ['name' => 'EVGA', 'categories' => json_encode(['gpu', 'psuply'])],
+            ['name' => 'ASRock', 'categories' => json_encode(['mobo'])],
+            ['name' => 'Biostar', 'categories' => json_encode(['mobo'])],
+            ['name' => 'Corsair', 'categories' => json_encode(['ram', 'storage'])],
+            ['name' => 'Kingston', 'categories' => json_encode(['ram', 'storage'])],
+            ['name' => 'Crucial', 'categories' => json_encode(['ram', 'storage'])],
+            ['name' => 'Western Digital', 'categories' => json_encode(['storage'])],
+            ['name' => 'Seagate', 'categories' => json_encode(['storage'])],
+            ['name' => 'Toshiba', 'categories' => json_encode(['storage'])],
+            ['name' => 'SanDisk', 'categories' => json_encode(['storage'])],
+            ['name' => 'ADATA', 'categories' => json_encode(['storage'])],
+            ['name' => 'Patriot', 'categories' => json_encode(['storage'])],
+            ['name' => 'ZOTAC', 'categories' => json_encode(['gpu'])],
+            ['name' => 'HyperX', 'categories' => json_encode(['ram'])],
+            ['name' => 'Cooler Master', 'categories' => json_encode(['psuply'])],
+            ['name' => 'Corsair', 'categories' => json_encode(['psuply'])],
         ];
 
         foreach ($brands as $brand) {
             DB::table('brands')->insert($brand);
         }
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('brands');
     }
 };

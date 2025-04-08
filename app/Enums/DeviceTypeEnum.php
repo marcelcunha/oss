@@ -4,11 +4,11 @@ namespace App\Enums;
 
 enum DeviceTypeEnum: string
 {
-    case MOBILE = 'mobile';
-    case TABLET = 'tablet';
     case DESKTOP = 'desktop';
     case LAPTOP = 'laptop';
+    case MOBILE = 'mobile';
     case ROUTER = 'router';
+    case TABLET = 'tablet';
 
     public function label(): string
     {
@@ -20,6 +20,4 @@ enum DeviceTypeEnum: string
             self::ROUTER => 'Roteador',
         };
     }
-
-    
 }

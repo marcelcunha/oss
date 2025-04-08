@@ -2,17 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\DeviceTypeEnum;
 use App\Http\Requests\StoreDeviceRequest;
 use App\Http\Requests\UpdateDeviceRequest;
-use App\Models\Brand;
-use App\Models\Client;
 use App\Models\Device;
-use App\Models\DeviceType;
 use App\Services\DeviceService;
 
 class DeviceController extends Controller
 {
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create(DeviceService $service)
+    {
+        return view('pages.register.devices.create', $service->create());
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Device $device)
+    {
+        $device->delete();
+
+        return redirect()->route('devices.index')
+            ->with('success', 'Equipamento excluído com sucesso!');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Device $device, DeviceService $service)
+    {
+        return view('pages.register.devices.edit', $service->edit($device));
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -39,11 +62,11 @@ class DeviceController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display the specified resource.
      */
-    public function create(DeviceService $service)
+    public function show(Device $device)
     {
-        return view('pages.register.devices.create', $service->create());
+        return view('pages.register.devices.show', compact('device'));
     }
 
     /**
@@ -59,22 +82,6 @@ class DeviceController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Device $device)
-    {
-        return view('pages.register.devices.show', compact('device'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Device $device, DeviceService $service)
-    {
-        return view('pages.register.devices.edit', $service->edit($device));
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateDeviceRequest $request, Device $device)
@@ -83,16 +90,5 @@ class DeviceController extends Controller
 
         return redirect()->route('devices.index')
             ->with('success', 'Equipamento atualizado com sucesso!');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Device $device)
-    {
-        $device->delete();
-
-        return redirect()->route('devices.index')
-            ->with('success', 'Equipamento excluído com sucesso!');
     }
 }

@@ -31,7 +31,7 @@ class Select extends AbstractInput
         }
 
         if ($this->required) {
-            $this->label = $this->label . ' *';
+            $this->label = $this->label.' *';
         }
     }
 

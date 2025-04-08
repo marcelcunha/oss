@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Enums\DeviceTypeEnum;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class UpdateDeviceRequest extends StoreDeviceRequest
