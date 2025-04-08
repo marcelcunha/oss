@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Enums\DeviceTypeEnum;
 use App\Models\Brand;
 use App\Models\Client;
-use App\Models\DeviceType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +21,7 @@ class DeviceFactory extends Factory
     {
         return [
             'client_id' => Client::factory()->create()->id,
-            'type_id' => DeviceType::factory()->create()->id,
+            'type' => $this->faker->randomElement(DeviceTypeEnum::cases())?->value,
             'brand_id' => Brand::factory()->create()->id,
             'model' => $this->faker->optional()->word(),
             'serial_number' => $this->faker->optional()->unique()?->word(),

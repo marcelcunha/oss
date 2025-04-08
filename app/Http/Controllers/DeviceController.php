@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\DeviceTypeEnum;
 use App\Http\Requests\StoreDeviceRequest;
 use App\Http\Requests\UpdateDeviceRequest;
 use App\Models\Brand;
 use App\Models\Client;
 use App\Models\Device;
 use App\Models\DeviceType;
+use App\Services\DeviceService;
 
 class DeviceController extends Controller
 {
@@ -39,13 +41,9 @@ class DeviceController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(DeviceService $service)
     {
-        $clients = Client::orderBy('name')->pluck('name', 'id');
-        $types = DeviceType::orderBy('name')->pluck('name', 'id');
-        $brands = Brand::orderBy('name')->pluck('name', 'id');
-
-        return view('pages.register.devices.create', compact('clients', 'types', 'brands'));
+        return view('pages.register.devices.create', $service->create());
     }
 
     /**
@@ -71,13 +69,9 @@ class DeviceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Device $device)
+    public function edit(Device $device, DeviceService $service)
     {
-        $clients = Client::orderBy('name')->pluck('name', 'id');
-        $types = DeviceType::orderBy('name')->pluck('name', 'id');
-        $brands = Brand::orderBy('name')->pluck('name', 'id');
-
-        return view('pages.register.devices.edit', compact('device', 'clients', 'types', 'brands'));
+        return view('pages.register.devices.edit', $service->edit($device));
     }
 
     /**

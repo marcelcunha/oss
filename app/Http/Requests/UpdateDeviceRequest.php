@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\DeviceTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -24,7 +25,7 @@ class UpdateDeviceRequest extends StoreDeviceRequest
     {
         return [
             'client_id' => ['required', 'integer', 'exists:clients,id'],
-            'type_id' => ['required', 'integer', 'exists:device_types,id'],
+            'type' => ['required', Rule::enum(DeviceTypeEnum::class)],
             'brand_id' => ['required', 'integer', 'exists:brands,id'],
             'model' => ['nullable', 'string', 'max:50'],
             'serial_number' => ['nullable', 'string', 'max:50', Rule::unique('devices', 'serial_number')->ignore($this->device)],

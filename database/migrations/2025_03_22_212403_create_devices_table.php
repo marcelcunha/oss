@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
+            $table->string('type', 30);
             $table->string('model', 50)->nullable();
             $table->string('serial_number', 50)->nullable();
             $table->string('service_tag', 30)->nullable();
             $table->text('description')->nullable();
-            $table->foreignId('type_id')->constrained('device_types', 'id');
             $table->foreignId('brand_id')->constrained('brands');
             $table->foreignId('client_id')->constrained('clients');
             $table->timestamps();
