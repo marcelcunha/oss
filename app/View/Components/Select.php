@@ -24,7 +24,7 @@ class Select extends AbstractInput
         public bool $required = false,
     ) {
         $this->name = $this->name ?? Str::snake($this->label);
-        $this->id = $this->id ?? $this->name;
+        $this->id = $this->id ?? preg_replace('/\[(.*?)\]/', '_$1', $this->name);
 
         if ($this->options instanceof Collection) {
             $this->options = $this->options->toArray();

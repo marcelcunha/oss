@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\View;
@@ -21,12 +22,28 @@ class Table extends Component
         private bool $simple = true,
     ) {}
 
-    /**
-     * Get the view / contents that represent the component.
-     */
-    public function render(): View|Closure|string
+    public function formatCell(string $column, mixed $row): string
     {
-        return view('components.table');
+        $value = data_get($row, $column, '');
+
+        if (is_array($this->columns[$column])) {
+            $format = data_get($this->columns[$column], 'format', false);
+
+            return match ($format) {
+                'date' => Carbon::parse($value)->format('d/m/Y'),
+                'money' => 'R$ '.number_format($value, 2, ',', '.'),
+                'enum' => $value->label(),
+                default => $value,
+            };
+
+        }
+
+        return $value;
+    }
+
+    public function getColumns(): array
+    {
+        return array_keys($this->columns);
     }
 
     public function getTitles(): array
@@ -44,9 +61,23 @@ class Table extends Component
         return $titles;
     }
 
-    public function getColumns(): array
+    public function isCustomCell(string $column): bool
     {
-        return array_keys($this->columns);
+        if (! $this->simple) {
+            if ($this->columns[$column]['custom'] ?? false) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.table');
     }
 
     public function totalColumns(): int
@@ -58,17 +89,5 @@ class Table extends Component
         }
 
         return $total;
-    }
-
-    public function isCustomCell(string $column): bool
-    {
-        if (! $this->simple) {
-            if ($this->columns[$column]['custom'] ?? false) {
-                return true;
-
-            }
-        }
-
-        return false;
     }
 }

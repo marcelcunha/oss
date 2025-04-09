@@ -18,6 +18,7 @@ class Textarea extends AbstractInput
         public ?string $id = null,
         public ?string $parentClass = null,
         public bool $required = false,
+        public string $value = '',
     ) {
         $this->name = $this->name ?? Str::snake($this->label);
         $this->id = $this->id ?? $this->name;
@@ -25,6 +26,7 @@ class Textarea extends AbstractInput
         if ($required) {
             $this->label = $this->label.' *';
         }
+
     }
 
     /**

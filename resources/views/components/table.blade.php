@@ -29,7 +29,8 @@
                                 {{ $cell($row) }}
                             @else
                                 <!-- Se não houver slot, exibe normalmente -->
-                                {{ data_get($row, $column, '') }}
+                               
+                                {{ $formatCell($column, $row) }}
                             @endisset
                     </td>
                 @endforeach

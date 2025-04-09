@@ -9,8 +9,8 @@
         @empty($options)
             {{ $slot }}
         @else
-            @if (!empty($placeholder) && !$value)
-                <option>{{ $placeholder }}</option>
+            @if (!empty($placeholder) && empty($value))
+                <option value=''>{{ $placeholder }}</option>
             @endif
 
             @foreach ($options as $key => $option)
