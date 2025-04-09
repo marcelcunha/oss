@@ -7,6 +7,16 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('datafeeds');
+    }
+
+    /**
      * Run the migrations.
      *
      * @return void
@@ -21,15 +31,5 @@ return new class extends Migration
             $table->tinyInteger('data_type')->default(1);
             $table->timestamps();
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('datafeeds');
     }
 };

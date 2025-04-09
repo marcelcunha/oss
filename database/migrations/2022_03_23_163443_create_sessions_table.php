@@ -7,6 +7,16 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('sessions');
+    }
+
+    /**
      * Run the migrations.
      *
      * @return void
@@ -21,15 +31,5 @@ return new class extends Migration
             $table->text('payload');
             $table->integer('last_activity')->index();
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('sessions');
     }
 };

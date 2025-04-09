@@ -187,4 +187,3 @@ it('should not save new budget with invalid description', function () {
             'description',
         ]);
 });
-

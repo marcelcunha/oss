@@ -9,14 +9,6 @@ use Illuminate\Support\ServiceProvider;
 class BladeServiceProvider extends ServiceProvider
 {
     /**
-     * Register services.
-     */
-    public function register(): void
-    {
-        //
-    }
-
-    /**
      * Bootstrap services.
      */
     public function boot(): void
@@ -24,11 +16,19 @@ class BladeServiceProvider extends ServiceProvider
         $this->registerScopeDirective();
     }
 
+    /**
+     * Register services.
+     */
+    public function register(): void
+    {
+        //
+    }
+
     public function registerScopeDirective(): void
     {
         /**
          * Copiado do repositório MaryUi
-         * 
+         *
          * https://github.com/robsontenorio/mary
          */
         Blade::directive('scope', function ($expression) {

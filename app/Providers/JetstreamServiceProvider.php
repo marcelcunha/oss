@@ -9,14 +9,6 @@ use Laravel\Jetstream\Jetstream;
 class JetstreamServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
-     */
-    public function register(): void
-    {
-        //
-    }
-
-    /**
      * Bootstrap any application services.
      */
     public function boot(): void
@@ -24,6 +16,14 @@ class JetstreamServiceProvider extends ServiceProvider
         $this->configurePermissions();
 
         Jetstream::deleteUsersUsing(DeleteUser::class);
+    }
+
+    /**
+     * Register any application services.
+     */
+    public function register(): void
+    {
+        //
     }
 
     /**

@@ -6,7 +6,6 @@ use App\Enums\DeviceTypeEnum;
 use App\Models\Brand;
 use App\Models\Client;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Arr;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Device>
@@ -34,11 +33,11 @@ class DeviceFactory extends Factory
     public function nonComputer(): static
     {
         $types = array_filter(DeviceTypeEnum::cases(), function ($case) {
-            return !in_array($case->value, [
+            return ! in_array($case->value, [
                 DeviceTypeEnum::DESKTOP->value,
                 DeviceTypeEnum::LAPTOP->value,
             ]);
-        },);
+        }, );
 
         return $this->state([
             'type' => $this->faker->randomElement($types)?->value,

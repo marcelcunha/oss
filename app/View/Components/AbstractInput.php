@@ -6,7 +6,6 @@ use Illuminate\View\Component;
 
 abstract class AbstractInput extends Component
 {
-
     public ?string $name;
 
     public function getErrorAttribute(): string

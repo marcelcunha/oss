@@ -9,14 +9,10 @@ class DataFeed extends Model
 {
     use HasFactory;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $guarded = ['id'];
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $table = 'datafeeds';
 
     /**

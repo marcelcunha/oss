@@ -38,7 +38,7 @@ it('cannot delete a brand if not authenticated', function () {
         ->delete(route('brands.destroy', $brand));
 
     $response->assertRedirect(route('brands.index'))
-    ->assertSessionHas('success');
+        ->assertSessionHas('success');
     $this->assertDatabaseMissing('brands', ['id' => $brand->id]);
 });
 
@@ -51,6 +51,6 @@ it('cannot delete a brand if used in a device', function () {
     $response = $this->delete(route('brands.destroy', $brand));
 
     $response->assertRedirect(route('brands.index'))
-    ->assertSessionHas('error', 'Marca não pode ser excluída, pois está associada a um dispositivo.');
+        ->assertSessionHas('error', 'Marca não pode ser excluída, pois está associada a um dispositivo.');
     $this->assertDatabaseHas('brands', ['id' => $brand->id]);
 });

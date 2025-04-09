@@ -31,19 +31,20 @@ class BudgetService
             'acceptableTypes' => [DeviceTypeEnum::DESKTOP->value, DeviceTypeEnum::LAPTOP->value],
         ];
     }
+
     public function edit(Budget $budget): array
     {
         return [
             'budget' => $budget,
-            ...$this->create()
+            ...$this->create(),
         ];
     }
 
     public function index(): array
     {
         $budgets = Budget::query()
-        ->with(['client', 'device.brand'])
-        ->orderBy('date', 'desc')->paginate(10);
+            ->with(['client', 'device.brand'])
+            ->orderBy('date', 'desc')->paginate(10);
 
         return [
             'rows' => $budgets,
@@ -88,6 +89,7 @@ class BudgetService
             return $budget;
         });
     }
+
     public function update(Budget $budget, string $date, int $client_id, int $device_id, string $description, array $configuration = []): Budget
     {
         return DB::transaction(function () use ($budget, $date, $client_id, $device_id, $description, $configuration) {

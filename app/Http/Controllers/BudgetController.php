@@ -89,7 +89,7 @@ class BudgetController extends Controller
     {
         try {
             $service->update($budget, ...$request->validated());
-            
+
             return redirect()->route('budgets.index')
                 ->with('success', 'Orçamento atualizado com sucesso!');
         } catch (\Throwable $th) {

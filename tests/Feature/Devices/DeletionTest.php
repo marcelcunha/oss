@@ -33,5 +33,3 @@ it('should not delete a device if not authenticated', function () {
         'id' => $device->id,
     ]);
 });
-
-

@@ -16,14 +16,6 @@ use Laravel\Fortify\Fortify;
 class FortifyServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
-     */
-    public function register(): void
-    {
-        //
-    }
-
-    /**
      * Bootstrap any application services.
      */
     public function boot(): void
@@ -42,5 +34,13 @@ class FortifyServiceProvider extends ServiceProvider
         RateLimiter::for('two-factor', function (Request $request) {
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
+    }
+
+    /**
+     * Register any application services.
+     */
+    public function register(): void
+    {
+        //
     }
 }
