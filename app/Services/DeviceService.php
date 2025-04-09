@@ -7,9 +7,13 @@ use App\Models\Client;
 use App\Models\Device;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use InvalidArgumentException;
 
 class DeviceService
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function create(): array
     {
         return [
@@ -19,6 +23,9 @@ class DeviceService
         ];
     }
 
+    /**
+     * @return Collection<int, Device>
+     */
     public static function devices(?int $clientId = null): Collection
     {
         return Device::query()
@@ -27,24 +34,32 @@ class DeviceService
             ->get();
     }
 
+    /**
+     * @return Collection<int, string>
+     */
     public static function devicesForSelect(?int $clientId = null): Collection
     {
         return self::devices($clientId)
             ->mapWithKeys(
                 function (Device $device) {
-                    $name = $device->brand->name;
+                    $name = $device->brand?->name;
 
                     if ($device->model) {
                         $name .= ' - '.$device->model;
                     }
 
                     return [
-                        $device->id => $device->brand->name.' '.$device->model,
+                        $device->id => $name,
                     ];
                 }
             );
     }
 
+    /**
+     * @return array<string, mixed>
+     *
+     * @throws InvalidArgumentException
+     */
     public function edit(Device $device): array
     {
         return [
@@ -53,6 +68,9 @@ class DeviceService
         ];
     }
 
+    /**
+     * @return array<string, string>
+     */
     private function deviceTypesForSelect(): array
     {
         return Arr::mapWithKeys(DeviceTypeEnum::cases(), function (DeviceTypeEnum $type) {

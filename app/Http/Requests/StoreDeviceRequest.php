@@ -8,6 +8,9 @@ use Illuminate\Validation\Rule;
 
 class StoreDeviceRequest extends FormRequest
 {
+    /**
+     * @return array<string, string>
+     */
     public function attributes(): array
     {
         return [

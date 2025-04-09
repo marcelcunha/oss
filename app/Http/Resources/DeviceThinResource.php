@@ -14,14 +14,14 @@ class DeviceThinResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $description = $this->brand->name;
+        $description = $this->resource->brand->name;
 
-        if ($this->model) {
-            $description .= ' - '.$this->model;
+        if ($this->resource->model) {
+            $description .= ' - '.$this->resource->model;
         }
 
         return [
-            'id' => $this->id,
+            'id' => $this->resource->id,
             'description' => $description,
         ];
     }

@@ -11,6 +11,8 @@ class InputBadge extends Component
 {
     /**
      * Create a new component instance.
+     *
+     * @param  list<string>  $items
      */
     public function __construct(public string $label, public ?string $name, public ?string $id, public ?string $parentClass = null, public array $items = [])
     {

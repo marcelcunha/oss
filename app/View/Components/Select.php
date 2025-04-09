@@ -12,6 +12,8 @@ class Select extends AbstractInput
 {
     /**
      * Create a new component instance.
+     *
+     * @param  Collection<int,string>|array<int,string>  $options
      */
     public function __construct(
         public string $label,

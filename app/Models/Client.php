@@ -23,6 +23,9 @@ class Client extends Model
         'complement',
     ];
 
+    /**
+     * @return HasMany<Device, $this>
+     */
     public function devices(): HasMany
     {
         return $this->hasMany(Device::class);

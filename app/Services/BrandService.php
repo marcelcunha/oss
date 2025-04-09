@@ -8,6 +8,9 @@ use Illuminate\Support\Collection;
 
 class BrandService
 {
+    /**
+     * @return Collection <int, Brand>
+     */
     public static function brands(?BrandCategoryEnum $category = null): Collection
     {
         return Brand::query()
@@ -16,6 +19,9 @@ class BrandService
             ->get();
     }
 
+    /**
+     * @return Collection <int, string>
+     */
     public static function brandsForSelect(?BrandCategoryEnum $category = null): Collection
     {
         return self::brands($category)
@@ -28,6 +34,9 @@ class BrandService
             );
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function edit(Brand $brand): array
     {
         $categories = '';
@@ -41,6 +50,9 @@ class BrandService
         ];
     }
 
+    /**
+     * @param  array<string, mixed>  $categories
+     */
     public function store(string $name, array $categories = []): Brand
     {
 
@@ -50,6 +62,9 @@ class BrandService
         ]);
     }
 
+    /**
+     * @param  array<string, mixed>  $categories
+     */
     public function update(Brand $brand, string $name, array $categories = []): Brand
     {
         $brand->update([

@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property-read string $name
+ * @property-read \App\Models\Brand|null $brand
+ */
 class Device extends Model
 {
     /** @use HasFactory<\Database\Factories\DeviceFactory> */
@@ -28,20 +32,29 @@ class Device extends Model
         'description',
     ];
 
+    /**
+     * @return BelongsTo<Brand, $this>
+     */
     public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
     }
 
+    /**
+     * @return BelongsTo<Client, $this>
+     */
     public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class)->orderBy('name');
     }
 
+    /**
+     * @return Attribute<string, never>
+     */
     protected function name(): Attribute
     {
         return Attribute::make(
-            function () {
+            get: function (): string {
                 $description = $this->brand->name;
 
                 if ($this->model) {

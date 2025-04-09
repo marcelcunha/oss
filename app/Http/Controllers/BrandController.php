@@ -6,14 +6,16 @@ use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
 use App\Models\Brand;
 use App\Services\BrandService;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\RedirectResponse;
 
 class BrandController extends Controller
 {
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         return view('pages.register.brands.create');
     }
@@ -21,7 +23,7 @@ class BrandController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Brand $brand)
+    public function destroy(Brand $brand): RedirectResponse
     {
         try {
             $brand->delete();
@@ -41,7 +43,7 @@ class BrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Brand $brand, BrandService $service)
+    public function edit(Brand $brand, BrandService $service): View
     {
 
         return view('pages.register.brands.edit', $service->edit($brand));
@@ -50,7 +52,7 @@ class BrandController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
         $brands = Brand::orderBy('name')->paginate(10);
 
@@ -70,7 +72,7 @@ class BrandController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBrandRequest $request, BrandService $service)
+    public function store(StoreBrandRequest $request, BrandService $service): RedirectResponse
     {
         $service->store(...$request->validated());
 
@@ -81,7 +83,7 @@ class BrandController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBrandRequest $request, Brand $brand, BrandService $service)
+    public function update(UpdateBrandRequest $request, Brand $brand, BrandService $service): RedirectResponse
     {
         $service->update($brand, ...$request->validated());
 

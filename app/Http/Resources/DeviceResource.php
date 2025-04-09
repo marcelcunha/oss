@@ -15,14 +15,14 @@ class DeviceResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'type' => $this->type,
-            'brand' => $this->brand->name,
-            'model' => $this->model,
-            'serial_number' => $this->serial_number,
-            'service_tag' => $this->service_tag,
-            'description' => $this->description,
-            'client' => $this->client->name,
+            'id' => $this->resource->id,
+            'type' => $this->resource->type,
+            'brand' => $this->resource->brand->name,
+            'model' => $this->resource->model,
+            'serial_number' => $this->resource->serial_number,
+            'service_tag' => $this->resource->service_tag,
+            'description' => $this->resource->description,
+            'client' => $this->resource->client->name,
         ];
     }
 }

@@ -6,12 +6,21 @@ use Carbon\Carbon;
 use Closure;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
 use Illuminate\View\Component;
 
+/**
+ * @template TKey of array-key
+ * @template TValue
+ */
 class Table extends Component
 {
     /**
      * Create a new component instance.
+     *
+     * @param  array<string, string|array<string, string>>  $columns
+     * @param  LengthAwarePaginator<Collection<TKey, TValue>>  $rows
+     * @param  array<string, string>  $actions
      */
     public function __construct(
         public array $columns,
@@ -41,11 +50,17 @@ class Table extends Component
         return $value;
     }
 
+    /**
+     * @return list<string>
+     */
     public function getColumns(): array
     {
         return array_keys($this->columns);
     }
 
+    /**
+     * @return list<string>
+     */
     public function getTitles(): array
     {
         $titles = [];

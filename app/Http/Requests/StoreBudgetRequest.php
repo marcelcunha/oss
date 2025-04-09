@@ -12,6 +12,9 @@ class StoreBudgetRequest extends FormRequest
 {
     private ?Device $device = null;
 
+    /**
+     * @return array<string, string>
+     */
     public function attributes(): array
     {
         return [

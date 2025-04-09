@@ -23,16 +23,25 @@ class Budget extends Model
         'description',
     ];
 
+    /**
+     * @return BelongsTo<Client, $this>
+     */
     public function client(): BelongsTo
     {
         return $this->BelongsTo(Client::class);
     }
 
+    /**
+     * @return HasOne<DeviceConfiguration, $this>
+     */
     public function configuration(): HasOne
     {
         return $this->hasOne(DeviceConfiguration::class);
     }
 
+    /**
+     * @return BelongsTo<Device, $this>
+     */
     public function device(): BelongsTo
     {
         return $this->BelongsTo(Device::class);

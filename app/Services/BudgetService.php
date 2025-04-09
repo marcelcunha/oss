@@ -7,9 +7,13 @@ use App\Enums\DeviceTypeEnum;
 use App\Models\Budget;
 use App\Models\Client;
 use Illuminate\Support\Facades\DB;
+use InvalidArgumentException;
 
 class BudgetService
 {
+    /**
+     * @return array <string, mixed>
+     */
     public function create(): array
     {
         $clients = Client::orderBy('name')->whereHas('devices')->pluck('name', 'id');
@@ -32,6 +36,9 @@ class BudgetService
         ];
     }
 
+    /**
+     * @return array <string, mixed>
+     */
     public function edit(Budget $budget): array
     {
         return [
@@ -40,6 +47,11 @@ class BudgetService
         ];
     }
 
+    /**
+     * @return array<string, mixed>
+     *
+     * @throws InvalidArgumentException
+     */
     public function index(): array
     {
         $budgets = Budget::query()
@@ -72,6 +84,9 @@ class BudgetService
         });
     }
 
+    /**
+     * @param  array<string, string|list<string>>  $configuration
+     */
     public function store(string $date, int $client_id, int $device_id, string $description, array $configuration = []): Budget
     {
         return DB::transaction(function () use ($date, $client_id, $device_id, $description, $configuration) {
@@ -90,6 +105,9 @@ class BudgetService
         });
     }
 
+    /**
+     * @param  array<string, string|list<string>>  $configuration
+     */
     public function update(Budget $budget, string $date, int $client_id, int $device_id, string $description, array $configuration = []): Budget
     {
         return DB::transaction(function () use ($budget, $date, $client_id, $device_id, $description, $configuration) {
