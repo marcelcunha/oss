@@ -4,7 +4,7 @@
         <div class="grid lg:grid-cols-6 gap-x-4 gap-y-6">
             <x-select value="{{ old('client_id', $device->client_id) }}" label='Proprietário' parent-class='col-span-4'
                 name='client_id' :options="$clients" placeholder='Selecione' />
-            <x-select value="{{ old('type_id', $device->type_id) }}" label='Tipo' name='type_id' :options="$types"
+            <x-select value="{{ old('type', $device->type->value) }}" label='Tipo' name='type' :options="$types"
                 placeholder='Selecione' />
             <x-select value="{{ old('brand_id', $device->brand_id) }}" label='Marca' name='brand_id' :options="$brands"
                 placeholder='Selecione' />

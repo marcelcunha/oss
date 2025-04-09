@@ -3,7 +3,6 @@
 use App\Enums\DeviceTypeEnum;
 use App\Models\Brand;
 use App\Models\Client;
-use App\Models\DeviceType;
 use App\Models\User;
 use Illuminate\Support\Str;
 
@@ -34,7 +33,7 @@ it('should not save new device without client', function () {
     $this->actingAs($this->user)
         ->post(route('devices.store'), [
             'client_id' => '',
-              'type' => fake()->randomElement(DeviceTypeEnum::cases())->value,
+            'type' => fake()->randomElement(DeviceTypeEnum::cases())->value,
             'brand_id' => Brand::factory()->create()->id,
             'model' => '',
             'serial_number' => 'Device Serial Number',
@@ -60,7 +59,7 @@ it('should not save new device without brand', function () {
     $this->actingAs($this->user)
         ->post(route('devices.store'), [
             'client_id' => Client::factory()->create()->id,
-              'type' => fake()->randomElement(DeviceTypeEnum::cases())->value,
+            'type' => fake()->randomElement(DeviceTypeEnum::cases())->value,
             'brand_id' => '',
             'model' => 'Device Model',
             'serial_number' => 'Device Serial Number',
@@ -73,7 +72,7 @@ it('should not save new device with model bigger than 50 characters', function (
     $this->actingAs($this->user)
         ->post(route('devices.store'), [
             'client_id' => Client::factory()->create()->id,
-              'type' => fake()->randomElement(DeviceTypeEnum::cases())->value,
+            'type' => fake()->randomElement(DeviceTypeEnum::cases())->value,
             'brand_id' => Brand::factory()->create()->id,
             'model' => Str::random(51),
             'serial_number' => 'Device Serial Number',
@@ -86,7 +85,7 @@ it('should not save new device with serial bigger than 50 characters', function 
     $this->actingAs($this->user)
         ->post(route('devices.store'), [
             'client_id' => Client::factory()->create()->id,
-              'type' => fake()->randomElement(DeviceTypeEnum::cases())->value,
+            'type' => fake()->randomElement(DeviceTypeEnum::cases())->value,
             'brand_id' => Brand::factory()->create()->id,
             'model' => 'Device Model',
             'serial_number' => Str::random(51),
@@ -99,7 +98,7 @@ it('should not save new device with service tag bigger than 30 characters', func
     $this->actingAs($this->user)
         ->post(route('devices.store'), [
             'client_id' => Client::factory()->create()->id,
-              'type' => fake()->randomElement(DeviceTypeEnum::cases())->value,
+            'type' => fake()->randomElement(DeviceTypeEnum::cases())->value,
             'brand_id' => Brand::factory()->create()->id,
             'model' => 'Device Model',
             'serial_number' => 'Device Serial Number',

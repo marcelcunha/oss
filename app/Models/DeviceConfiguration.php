@@ -10,18 +10,6 @@ class DeviceConfiguration extends Model
     /** @use HasFactory<\Database\Factories\DeviceConfigurationFactory> */
     use HasFactory;
 
-    protected $filled = [
-        'os',
-        'cpu',
-        'mobo',
-        'memory',
-        'storage',
-        'gpu',
-        'power_suply',
-        'notes',
-        'device_id',
-    ];
-
     protected $casts = [
         'memory' => 'array',
         'storage' => 'array',
@@ -29,5 +17,17 @@ class DeviceConfiguration extends Model
         'power_supply' => 'array',
         'cpu' => 'array',
         'mobo' => 'array',
+    ];
+
+    protected $fillable = [
+        'os',
+        'cpu',
+        'mobo',
+        'memory',
+        'storage',
+        'gpu',
+        'power_suplly',
+        'notes',
+        'device_id',
     ];
 }

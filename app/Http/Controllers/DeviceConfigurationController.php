@@ -9,14 +9,6 @@ use App\Models\DeviceConfiguration;
 class DeviceConfigurationController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -25,17 +17,9 @@ class DeviceConfigurationController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Remove the specified resource from storage.
      */
-    public function store(StoreDeviceConfigurationRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(DeviceConfiguration $deviceConfiguration)
+    public function destroy(DeviceConfiguration $deviceConfiguration)
     {
         //
     }
@@ -49,17 +33,33 @@ class DeviceConfigurationController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Display a listing of the resource.
      */
-    public function update(UpdateDeviceConfigurationRequest $request, DeviceConfiguration $deviceConfiguration)
+    public function index()
     {
         //
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Display the specified resource.
      */
-    public function destroy(DeviceConfiguration $deviceConfiguration)
+    public function show(DeviceConfiguration $deviceConfiguration)
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreDeviceConfigurationRequest $request)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateDeviceConfigurationRequest $request, DeviceConfiguration $deviceConfiguration)
     {
         //
     }

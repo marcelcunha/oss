@@ -42,14 +42,14 @@ class DeviceController extends Controller
     public function index()
     {
         $devices = Device::query()
-            ->with(['client', 'type', 'brand'])
+            ->with(['client', 'brand'])
             ->paginate(10);
 
         return view('pages.register.devices.index', [
             'rows' => $devices,
             'columns' => [
                 'client.name' => 'Proprietário',
-                'type.name' => 'Tipo',
+                'type' => ['label' => 'Tipo', 'format' => 'enum'],
                 'brand.name' => 'Marca',
                 'model' => 'Modelo',
             ],

@@ -13,7 +13,7 @@ it('should open edit device page', function () {
         ->assertStatus(200)
         ->assertSee('Editar Equipamento')
         ->assertSee($device->client->name)
-        ->assertSee($device->type->name)
+        ->assertSee($device->type->label())
         ->assertSee($device->brand->name);
 });
 
@@ -23,7 +23,7 @@ it('should update device', function () {
     $this->actingAs($this->user)
         ->put(route('devices.update', $device->id), [
             'client_id' => $device->client_id,
-            'type_id' => $device->type_id,
+            'type' => $device->type->value,
             'brand_id' => $device->brand_id,
             'model' => 'Device Model Updated',
             'serial_number' => 'Device Serial Number Updated',
@@ -67,7 +67,7 @@ it('should not update device without type', function () {
             'serial_number' => 'Device Serial Number Updated',
             'description' => 'Device Description Updated',
         ])
-        ->assertSessionHasErrors('type_id');
+        ->assertSessionHasErrors('type');
 });
 
 it('should not update device without brand', function () {

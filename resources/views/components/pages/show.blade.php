@@ -1,19 +1,23 @@
 <x-app-layout>
 
-    <div class="py-4 px-8">
+    <div class="px-8 py-4" {{ $attributes->merge(['class' => '']) }}>
         <!-- actions -->
-        <div class="sm:flex sm:justify-between sm:items-center mb-8">
+        <div class="mb-8 sm:flex sm:items-center sm:justify-between">
 
             <!-- Left: Title -->
             <div class="mb-4 sm:mb-0">
-                <h1 class="text-2xl md:text-3xl text-gray-800 dark:text-gray-100 font-bold">{{ $title }}</h1>
-
+                <h1 class="text-2xl font-bold text-gray-800 md:text-3xl dark:text-gray-100">{{ $title }}</h1>
                 @isset($subtitle)
-                    <h3 class="text-lg md:text-xl md:pl-10 text-gray-800 dark:text-gray-100 font-bold">{{ $subtitle }}
+                    <h3 class="text-lg font-bold text-gray-800 md:pl-10 md:text-xl dark:text-gray-100">
+                        {{ $subtitle }}
                     </h3>
                 @endisset
 
             </div>
+            <!-- Right: Actions -->
+            @isset($actions)
+                {{ $actions }}
+            @endisset
 
         </div>
         <x-card>

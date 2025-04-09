@@ -2,17 +2,30 @@
 
 namespace App\Services;
 
+use App\Enums\BrandCategoryEnum;
 use App\Models\Brand;
+use Illuminate\Support\Collection;
 
 class BrandService
 {
-    public function store(string $name, array $categories = []): Brand
+    public static function brands(?BrandCategoryEnum $category = null): Collection
     {
+        return Brand::query()
+            ->when($category, fn ($query) => $query->whereJsonContains('categories', $category))
+            ->orderBy('name')
+            ->get();
+    }
 
-        return Brand::create([
-            'name' => $name,
-            'categories' => $categories,
-        ]);
+    public static function brandsForSelect(?BrandCategoryEnum $category = null): Collection
+    {
+        return self::brands($category)
+            ->mapWithKeys(
+                function (Brand $brand) {
+                    return [
+                        $brand->id => $brand->name,
+                    ];
+                }
+            );
     }
 
     public function edit(Brand $brand): array
@@ -28,9 +41,18 @@ class BrandService
         ];
     }
 
+    public function store(string $name, array $categories = []): Brand
+    {
+
+        return Brand::create([
+            'name' => $name,
+            'categories' => $categories,
+        ]);
+    }
+
     public function update(Brand $brand, string $name, array $categories = []): Brand
     {
-         $brand->update([
+        $brand->update([
             'name' => $name,
             'categories' => $categories,
         ]);
