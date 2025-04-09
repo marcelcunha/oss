@@ -1,0 +1,11 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "ordered_class_elements": {
+            "sort_algorithm": "alpha"
+        },
+        "phpdoc_line_span": {
+            "property": "single"
+        }
+    }
+}
