@@ -19,6 +19,6 @@ class DeviceController extends Controller
 
     public function devices(Request $request): ResourceCollection
     {
-        return DeviceThinResource::collection(\App\Services\DeviceService::devices($request->integer('device_id') ));
+        return DeviceThinResource::collection(\App\Services\DeviceService::devices($request->integer('client_id') ));
     }
 }
