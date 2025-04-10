@@ -2,17 +2,17 @@
     <x-form
         action="{{ route('budgets.store') }}" cancelRoute="{{ route('budgets.index') }}" id='budget-form'>
         <div
-            class="grid grid-cols-1 lg:gap-x-4 gap-y-6 lg:grid-cols-6 " x-data="budgetForm()">
+            class="grid grid-cols-1 md:gap-x-4 gap-y-6 md:grid-cols-6 " x-data="budgetForm()">
             <x-input-text
-                label='Data de Entrada' name='date' parent-class='lg:col-span-2' required type='date'
+                label='Data de Entrada' name='date' parent-class='md:col-span-2' required type='date'
                 value="{{ old('date') }}" />
 
             <x-select
-                :disabled="empty($clients)" :options="$clients" label='Cliente' name='client_id' parent-class='lg:col-span-2' required
+                :disabled="empty($clients)" :options="$clients" label='Cliente' name='client_id' parent-class='md:col-span-2' required
                 value="{{ old('client_id') }}" x-model='client' />
 
             <x-select
-                ::disabled='devices.length <= 0' label='Equipamento' name='device_id' parent-class='lg:col-span-2' required
+                ::disabled='devices.length <= 0' label='Equipamento' name='device_id' parent-class='md:col-span-2' required
                 value="{{ old('device_id') }}" x-model='device_id'>
                 <option selected>Selecione </option>
                 <template x-for="device in devices">
@@ -32,7 +32,7 @@
                             value="{{ old('configuration.os') }}" />
 
                         <x-form-session
-                            class='grid-cols-2' label='Processador' parent-class='lg:col-span-6'>
+                            class='md:grid-cols-2 gap-y-6 ' label='Processador' parent-class='md:col-span-6'>
                             <x-select
                                 :options="$cpuBrands" label='Marca' name='configuration[cpu][brand_id]' required
                                 value="{{ old('configuration.cpu.brand_id') }}" />
@@ -42,7 +42,7 @@
                         </x-form-session>
 
                         <x-form-session
-                            class='grid-cols-2' label='Placa Mãe' parent-class='lg:col-span-6'>
+                            class='md:grid-cols-2 gap-y-6' label='Placa Mãe' parent-class='md:col-span-6'>
                             <x-select
                                 :options="$moboBrands" label='Marca' name='configuration[mobo][brand_id]'
                                 value="{{ old('configuration.mobo.brand_id') }}" />
@@ -52,7 +52,7 @@
                         </x-form-session>
 
                         <x-form-session
-                            class='grid-cols-3' label='Memória Ram' parent-class='lg:col-span-6'>
+                            class='md:grid-cols-3 gap-y-6' label='Memória Ram' parent-class='md:col-span-6'>
                             <x-select
                                 :options="$ramBrands" label='Marca' name='configuration[memory][0][brand_id]'
                                 value="{{ old('configuration.memory.0.brand_id') }}" />
@@ -67,7 +67,7 @@
                         </x-form-session>
 
                         <x-form-session
-                            class='grid-cols-3' label='Armazenamento' parent-class='lg:col-span-6'>
+                            class='md:grid-cols-3 gap-y-6' label='Armazenamento' parent-class='md:col-span-6'>
                             <x-select
                                 :options="$storageBrands" label='Marca' name='configuration[storage][0][brand_id]'
                                 value="{{ old('configuration.storage.0.brand_id') }}" />
@@ -82,7 +82,7 @@
                         </x-form-session>
 
                         <x-form-session
-                            class='grid-cols-3' label='GPU' parent-class='lg:col-span-6'>
+                            class='md:grid-cols-3 gap-y-6' label='GPU' parent-class='md:col-span-6'>
                             <x-select
                                 :options="$gpuBrands" label='Marca' name='configuration[gpu][brand_id]'
                                 value="{{ old('configuration.gpu.brand_id') }}" />
@@ -97,7 +97,7 @@
                         </x-form-session>
 
                         <x-form-session
-                            class='grid-cols-3' label='Fonte' parent-class='lg:col-span-6'>
+                            class='md:grid-cols-3 gap-y-6' label='Fonte' parent-class='md:col-span-6'>
                             <x-select
                                 :options="$psuplyBrands" label='Marca' name='configuration[power_supply][brand_id]'
                                 value="{{ old('configuration.power_supply.brand_id') }}" />
@@ -120,7 +120,7 @@
             </template>
 
             <x-textarea
-                label='Relatos' parent-class='lg:col-span-6' name='description' value="{{ old('description') }}"/>
+                label='Relatos' parent-class='md:col-span-6' name='description' value="{{ old('description') }}"/>
 
         </div>
     </x-form>
@@ -133,7 +133,7 @@
                     acceptableTypes: @json($acceptableTypes),
                     client: @json(old('client_id', null)),
                     device_id: null,
-                    deviceResource: null,
+                    deviceResource: {type: 'desktop'},
                     devices: [],
                     async fillDevices() {
                         try {
