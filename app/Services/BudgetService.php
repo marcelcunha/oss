@@ -6,6 +6,7 @@ use App\Enums\BrandCategoryEnum;
 use App\Enums\DeviceTypeEnum;
 use App\Models\Budget;
 use App\Models\Client;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 
@@ -87,7 +88,7 @@ class BudgetService
     /**
      * @param  array<string, string|list<string>>  $configuration
      */
-    public function store(string $date, int $client_id, int $device_id, string $description, array $configuration = []): Budget
+    public function store(string|Carbon $date, int $client_id, int $device_id, string $description, array $configuration = []): Budget
     {
         return DB::transaction(function () use ($date, $client_id, $device_id, $description, $configuration) {
             $budget = Budget::create([

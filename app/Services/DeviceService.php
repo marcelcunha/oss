@@ -42,14 +42,9 @@ class DeviceService
         return self::devices($clientId)
             ->mapWithKeys(
                 function (Device $device) {
-                    $name = $device->brand?->name;
-
-                    if ($device->model) {
-                        $name .= ' - '.$device->model;
-                    }
-
+                   
                     return [
-                        $device->id => $name,
+                        $device->id => $device->name,
                     ];
                 }
             );

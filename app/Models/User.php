@@ -16,19 +16,10 @@ class User extends Authenticatable
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
-
-    use HasProfilePhoto;
+    // use HasProfilePhoto;
     use Notifiable;
-    use TwoFactorAuthenticatable;
+    // use TwoFactorAuthenticatable;
 
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var list<string>
-     */
-    protected $appends = [
-        'profile_photo_url',
-    ];
 
     /**
      * The attributes that should be cast.

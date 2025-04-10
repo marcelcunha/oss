@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DataFeed extends Model
 {
-    use HasFactory;
-
-    /** @var array */
+    /** @var list<string> */
     protected $guarded = ['id'];
 
     /** @var string */
@@ -40,7 +38,6 @@ class DataFeed extends Model
     /**
      * Counts a set of data based on the datatype
      *
-     * @param  int|null  $limit
      * @return mixed
      */
     public function sumDataSet(int $dataType, ?int $dataset = null)

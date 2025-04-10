@@ -84,7 +84,7 @@ class StoreBudgetRequest extends FormRequest
     private function getDevice(): ?Device
     {
         if ($this->device === null) {
-            $this->device = Device::find($this->device_id);
+            $this->device = Device::find($this->device_id)?->first();
         }
 
         return $this->device;

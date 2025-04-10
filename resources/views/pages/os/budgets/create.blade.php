@@ -2,7 +2,7 @@
     <x-form
         action="{{ route('budgets.store') }}" cancelRoute="{{ route('budgets.index') }}" id='budget-form'>
         <div
-            class="grid grid-cols-1 lg:gap-x-4 gap-y-6 lg:grid-cols-6 2xl:grid-cols-3" x-data="budgetForm()">
+            class="grid grid-cols-1 lg:gap-x-4 gap-y-6 lg:grid-cols-6 " x-data="budgetForm()">
             <x-input-text
                 label='Data de Entrada' name='date' parent-class='lg:col-span-2' required type='date'
                 value="{{ old('date') }}" />
@@ -106,7 +106,7 @@
                                 value="{{ old('configuration.power_supply.model') }}" />
                             <x-input-text
                                 label='Potência Nominal' name='configuration[power_supply][wattage]'
-                                value="{{ old('configuration.power_supply.wattage') }}">
+                                value="{{ old('configuration.power_supply.wattage') }}" type='number'>
                                 <x-slot:suffix>Watts</x-slot>
                             </x-input-text>
                         </x-form-session>

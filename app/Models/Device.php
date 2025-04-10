@@ -55,7 +55,7 @@ class Device extends Model
     {
         return Attribute::make(
             get: function (): string {
-                $description = $this->brand->name;
+                $description = "{$this->type->label()}: {$this->brand?->name}";
 
                 if ($this->model) {
                     $description .= ' - '.$this->model;

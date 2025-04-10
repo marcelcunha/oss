@@ -9,6 +9,7 @@ enum DeviceTypeEnum: string
     case MOBILE = 'mobile';
     case ROUTER = 'router';
     case TABLET = 'tablet';
+    case PRINTER = 'printer';
 
     public function label(): string
     {
@@ -18,6 +19,7 @@ enum DeviceTypeEnum: string
             self::DESKTOP => 'Desktop',
             self::LAPTOP => 'Notebook',
             self::ROUTER => 'Roteador',
+            self::PRINTER => 'Impressora',
         };
     }
 }

@@ -22,7 +22,7 @@ class DeviceFactory extends Factory
         return [
             'client_id' => Client::factory()->create()->id,
             'type' => $this->faker->randomElement(DeviceTypeEnum::cases())?->value,
-            'brand_id' => Brand::factory()->create()->id,
+            'brand_id' => Brand::get()->random()->id,
             'model' => $this->faker->optional()->word(),
             'serial_number' => $this->faker->optional()->unique()?->word(),
             'service_tag' => $this->faker->optional()->unique()?->word(),

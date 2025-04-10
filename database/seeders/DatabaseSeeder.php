@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             DashboardTableSeeder::class,
-            DeviceTypeSeeder::class,
             ClientSeeder::class,
             DeviceSeeder::class,
         ]);

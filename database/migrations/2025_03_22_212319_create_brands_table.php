@@ -36,7 +36,7 @@ return new class extends Migration
             ['name' => 'Samsung', 'categories' => json_encode(['laptop', 'storage'])],
             ['name' => 'Avell', 'categories' => json_encode(['laptop'])],
             ['name' => 'Compaq', 'categories' => json_encode(['laptop', 'desktop'])],
-            ['name' => 'HP', 'categories' => json_encode(['laptop', 'desktop'])],
+            ['name' => 'HP', 'categories' => json_encode(['laptop', 'desktop', 'printer'])],
             ['name' => 'Intel', 'categories' => json_encode(['cpu', 'gpu'])],
             ['name' => 'AMD', 'categories' => json_encode(['cpu'])],
             ['name' => 'NVIDIA', 'categories' => json_encode(['gpu'])],
@@ -58,6 +58,8 @@ return new class extends Migration
             ['name' => 'HyperX', 'categories' => json_encode(['ram'])],
             ['name' => 'Cooler Master', 'categories' => json_encode(['psuply'])],
             ['name' => 'Corsair', 'categories' => json_encode(['psuply'])],
+            ['name' => 'Thermaltake', 'categories' => json_encode(['psuply'])],
+            ['name' => 'Epson', 'categories' => json_encode(['printer'])]
         ];
 
         foreach ($brands as $brand) {
