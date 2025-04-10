@@ -17,10 +17,7 @@ class BudgetFactory extends Factory
     public function definition(): array
     {
         return [
-            'date' => $this->faker->dateTimeBetween('-1 year', 'now'),
-            'client_id' => \App\Models\Client::factory()->create()->id,
-            'device_id' => \App\Models\Device::factory()->nonComputer()->create()->id,
-            'description' => $this->faker->sentence(10),
+            
         ];
     }
 }

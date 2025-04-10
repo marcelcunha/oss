@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
-class UpdateBudgetRequest extends StoreBudgetRequest
+use Illuminate\Foundation\Http\FormRequest;
+
+class UpdateBudgetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,6 +21,6 @@ class UpdateBudgetRequest extends StoreBudgetRequest
      */
     public function rules(): array
     {
-        return parent::rules();
+        return [];
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\CheckinController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DeviceController;
@@ -21,6 +22,11 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', 'login');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::prefix('api')->name('api.')->group(function () {
+        Route::get('/devices', [DeviceController::class, 'devices'])->name('devices');
+        Route::get('/device/{device}', [DeviceController::class, 'device'])->name('device');
+    });
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -56,11 +62,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     Route::prefix('os')->group(function () {
-        Route::resource('budgets', BudgetController::class);
-    });
-
-    Route::prefix('api')->name('api.')->group(function () {
-        Route::get('/devices', [DeviceController::class, 'devices'])->name('devices');
-        Route::get('/device/{device}', [DeviceController::class, 'device'])->name('device');
+        Route::resource('checkins', CheckinController::class);
     });
 });

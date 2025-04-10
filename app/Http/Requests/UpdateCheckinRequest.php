@@ -2,20 +2,16 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\DeviceTypeEnum;
-use App\Models\Device;
-use Closure;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class StoreBudgetRequest extends FormRequest
+class UpdateCheckinRequest extends StoreCheckinRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,8 +21,6 @@ class StoreBudgetRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        return parent::rules();
     }
 }

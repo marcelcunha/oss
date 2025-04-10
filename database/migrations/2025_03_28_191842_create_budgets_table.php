@@ -21,10 +21,6 @@ return new class extends Migration
     {
         Schema::create('budgets', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->text('description');
-            $table->foreignId('client_id')->constrained();
-            $table->foreignId('device_id')->constrained();
             $table->timestamps();
         });
     }

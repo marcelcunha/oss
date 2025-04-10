@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             DashboardTableSeeder::class,
             ClientSeeder::class,
             DeviceSeeder::class,
+            CheckinSeeder::class,
         ]);
     }
 }

@@ -14,33 +14,33 @@ beforeEach(function () {
     $this->user = User::factory()->create();
 });
 
-it('should open create budget page', function () {
+it('should open create checkin page', function () {
     $this->actingAs($this->user)
-        ->get(route('budgets.create'))
+        ->get(route('checkins.create'))
         ->assertStatus(200);
 });
 
-it('should save new budget without configuration', function () {
+it('should save new checkin without configuration', function () {
     $client = Client::factory()->create();
     $device = Device::factory()->create(['type' => DeviceTypeEnum::TABLET]);
 
     $this->actingAs($this->user)
-        ->post(route('budgets.store'), [
+        ->post(route('checkins.store'), [
             'date' => now()->format('Y-m-d'),
             'description' => fake()->text(),
             'client_id' => $client->id,
             'device_id' => $device->id,
         ])
-        ->assertRedirect(route('budgets.index'))
+        ->assertRedirect(route('checkins.index'))
         ->assertSessionHas('success', 'Orçamento cadastrado com sucesso!');
 });
 
-it('should save new budget with configuration', function () {
+it('should save new checkin with configuration', function () {
     $client = Client::factory()->create();
     $device = Device::factory()->create(['type' => DeviceTypeEnum::DESKTOP]);
 
     $this->actingAs($this->user)
-        ->post(route('budgets.store'), [
+        ->post(route('checkins.store'), [
             'date' => now()->format('Y-m-d'),
             'description' => fake()->text(),
             'client_id' => $client->id,
@@ -77,16 +77,16 @@ it('should save new budget with configuration', function () {
                 ],
             ],
         ])
-        ->assertRedirect(route('budgets.index'))
+        ->assertRedirect(route('checkins.index'))
         ->assertSessionHas('success', 'Orçamento cadastrado com sucesso!');
 });
 
-it('should not save new budget with invalid configuration', function () {
+it('should not save new checkin with invalid configuration', function () {
     $client = Client::factory()->create();
     $device = Device::factory()->create(['type' => DeviceTypeEnum::DESKTOP]);
 
     $this->actingAs($this->user)
-        ->post(route('budgets.store'), [
+        ->post(route('checkins.store'), [
             'date' => now()->format('Y-m-d'),
             'description' => fake()->text(),
             'client_id' => $client->id,
@@ -126,12 +126,12 @@ it('should not save new budget with invalid configuration', function () {
         ]);
 });
 
-it('should not save new budget with invalid date', function () {
+it('should not save new checkin with invalid date', function () {
     $client = Client::factory()->create();
     $device = Device::factory()->create(['type' => DeviceTypeEnum::DESKTOP]);
 
     $this->actingAs($this->user)
-        ->post(route('budgets.store'), [
+        ->post(route('checkins.store'), [
             'date' => 'invalid-date',
             'description' => fake()->text(),
             'client_id' => $client->id,
@@ -142,11 +142,11 @@ it('should not save new budget with invalid date', function () {
         ]);
 });
 
-it('should not save new budget with invalid client', function () {
+it('should not save new checkin with invalid client', function () {
     $device = Device::factory()->create(['type' => DeviceTypeEnum::DESKTOP]);
 
     $this->actingAs($this->user)
-        ->post(route('budgets.store'), [
+        ->post(route('checkins.store'), [
             'date' => now()->format('Y-m-d'),
             'description' => fake()->text(),
             'client_id' => 9999, // Invalid client ID
@@ -157,11 +157,11 @@ it('should not save new budget with invalid client', function () {
         ]);
 });
 
-it('should not save new budget with invalid device', function () {
+it('should not save new checkin with invalid device', function () {
     $client = Client::factory()->create();
 
     $this->actingAs($this->user)
-        ->post(route('budgets.store'), [
+        ->post(route('checkins.store'), [
             'date' => now()->format('Y-m-d'),
             'description' => fake()->text(),
             'client_id' => $client->id,
@@ -172,12 +172,12 @@ it('should not save new budget with invalid device', function () {
         ]);
 });
 
-it('should not save new budget with invalid description', function () {
+it('should not save new checkin with invalid description', function () {
     $client = Client::factory()->create();
     $device = Device::factory()->create(['type' => DeviceTypeEnum::DESKTOP]);
 
     $this->actingAs($this->user)
-        ->post(route('budgets.store'), [
+        ->post(route('checkins.store'), [
             'date' => now()->format('Y-m-d'),
             'description' => '', // Invalid description
             'client_id' => $client->id,

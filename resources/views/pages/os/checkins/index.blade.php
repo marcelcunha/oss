@@ -1,12 +1,12 @@
-<x-pages.index title='Orçamentos'>
+<x-pages.index title='Checkin'>
     <div x-data="{ show: false, name: '', route: '' }">
         <x-slot name='actions'>
-            <x-button :href="route('budgets.create')">
-                Novo Orçamento
+            <x-button :href="route('checkins.create')">
+                Novo Checkin
             </x-button>
         </x-slot>
 
-        <x-card label="Orçamentos">
+        <x-card label="Checkin">
             <x-table :$columns :$rows :actions="$actions">
              
             </x-table>

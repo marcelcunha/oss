@@ -1,6 +1,6 @@
-<x-pages.upsert title='Novo Orçamento'>
+<x-pages.upsert title='Novo Checkin'>
     <x-form
-        action="{{ route('budgets.store') }}" cancelRoute="{{ route('budgets.index') }}" id='budget-form'>
+        action="{{ route('checkins.store') }}" cancelRoute="{{ route('checkins.index') }}" id='budget-form'>
         <div
             class="grid grid-cols-1 md:gap-x-4 gap-y-6 md:grid-cols-6 " x-data="budgetForm()">
             <x-input-text

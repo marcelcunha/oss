@@ -29,8 +29,8 @@ return new class extends Migration
             $table->json('gpu')->nullable();
             $table->json('power_supply')->nullable();
             $table->text('notes')->nullable();
-            $table->foreignId('device_id')->constrained()->onDelete('cascade');
-            $table->foreignId('budget_id')->constrained()->onDelete('cascade');
+            $table->foreignId('device_id')->constrained();
+            $table->foreignId('checkin_id')->constrained();
             $table->timestamps();
         });
     }

@@ -4,13 +4,13 @@ namespace App\Services;
 
 use App\Enums\BrandCategoryEnum;
 use App\Enums\DeviceTypeEnum;
-use App\Models\Budget;
+use App\Models\Checkin;
 use App\Models\Client;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 
-class BudgetService
+class CheckinService
 {
     /**
      * @return array <string, mixed>
@@ -40,10 +40,10 @@ class BudgetService
     /**
      * @return array <string, mixed>
      */
-    public function edit(Budget $budget): array
+    public function edit(Checkin $checkin): array
     {
         return [
-            'budget' => $budget,
+            'checkin' => $checkin,
             ...$this->create(),
         ];
     }
@@ -55,12 +55,12 @@ class BudgetService
      */
     public function index(): array
     {
-        $budgets = Budget::query()
+        $checkins = Checkin::query()
             ->with(['client', 'device.brand'])
             ->orderBy('date', 'desc')->paginate(10);
 
         return [
-            'rows' => $budgets,
+            'rows' => $checkins,
             'columns' => [
                 'date' => [
                     'label' => 'Data',
@@ -70,28 +70,28 @@ class BudgetService
                 'device.name' => 'Dispositivo',
             ],
             'actions' => [
-                'show' => 'budgets.show',
-                // 'edit' => 'budgets.edit',
-                // 'delete' => 'budgets.destroy',
+                'show' => 'checkins.show',
+                // 'edit' => 'checkins.edit',
+                // 'delete' => 'checkins.destroy',
             ],
         ];
     }
 
-    public function remove(Budget $budget): void
+    public function remove(Checkin $checkin): void
     {
-        DB::transaction(function () use ($budget) {
-            $budget->configuration()->delete();
-            $budget->delete();
+        DB::transaction(function () use ($checkin) {
+            $checkin->configuration()->delete();
+            $checkin->delete();
         });
     }
 
     /**
      * @param  array<string, string|list<string>>  $configuration
      */
-    public function store(string|Carbon $date, int $client_id, int $device_id, string $description, array $configuration = []): Budget
+    public function store(string|Carbon $date, int $client_id, int $device_id, string $description, array $configuration = []): Checkin
     {
         return DB::transaction(function () use ($date, $client_id, $device_id, $description, $configuration) {
-            $budget = Budget::create([
+            $checkin = Checkin::create([
                 'date' => $date,
                 'client_id' => $client_id,
                 'device_id' => $device_id,
@@ -99,20 +99,20 @@ class BudgetService
             ]);
 
             if (filled($configuration)) {
-                $budget->configuration()->create([...$configuration, 'device_id' => $device_id]);
+                $checkin->configuration()->create([...$configuration, 'device_id' => $device_id]);
             }
 
-            return $budget;
+            return $checkin;
         });
     }
 
     /**
      * @param  array<string, string|list<string>>  $configuration
      */
-    public function update(Budget $budget, string $date, int $client_id, int $device_id, string $description, array $configuration = []): Budget
+    public function update(Checkin $checkin, string $date, int $client_id, int $device_id, string $description, array $configuration = []): Checkin
     {
-        return DB::transaction(function () use ($budget, $date, $client_id, $device_id, $description, $configuration) {
-            $budget->update([
+        return DB::transaction(function () use ($checkin, $date, $client_id, $device_id, $description, $configuration) {
+            $checkin->update([
                 'date' => $date,
                 'client_id' => $client_id,
                 'device_id' => $device_id,
@@ -120,10 +120,10 @@ class BudgetService
             ]);
 
             if (filled($configuration)) {
-                $budget->configuration()->update([...$configuration, 'device_id' => $device_id]);
+                $checkin->configuration()->update([...$configuration, 'device_id' => $device_id]);
             }
 
-            return $budget;
+            return $checkin;
         });
     }
 }
