@@ -15,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth')->group(function () {
+    
 });
 
-Route::get('/devices', [DeviceController::class, 'devices'])->name('api.devices');
-Route::get('/device/{device}', [DeviceController::class, 'device'])->name('api.device');

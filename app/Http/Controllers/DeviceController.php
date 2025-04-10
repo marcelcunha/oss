@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDeviceRequest;
 use App\Http\Requests\UpdateDeviceRequest;
+use App\Http\Resources\DeviceResource;
+use App\Http\Resources\DeviceThinResource;
 use App\Models\Device;
 use App\Services\DeviceService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class DeviceController extends Controller
 {
@@ -92,5 +97,15 @@ class DeviceController extends Controller
 
         return redirect()->route('devices.index')
             ->with('success', 'Equipamento atualizado com sucesso!');
+    }
+
+    public function device(Device $device): JsonResource
+    {
+        return new DeviceResource($device);
+    }
+
+    public function devices(Request $request): ResourceCollection
+    {
+        return DeviceThinResource::collection(\App\Services\DeviceService::devices($request->integer('client_id')));
     }
 }

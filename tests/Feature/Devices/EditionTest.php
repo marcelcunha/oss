@@ -151,10 +151,12 @@ it('should not update device with duplicated service tag', function () {
     $device = Device::factory()->create();
     $deviceDuplicated = Device::factory()->create(['service_tag' => 'Service Tag Duplicated']);
 
+   
+
     $this->actingAs($this->user)
-        ->patch(route('devices.update', $device->id), [
+        ->put(route('devices.update', $device->id), [
             'client_id' => $device->client_id,
-            'type_id' => $device->type_id,
+            'type' => $device->type->value,
             'brand_id' => $device->brand_id,
             'model' => 'Device Model Updated',
             'serial_number' => 'Device Serial Number Updated',
