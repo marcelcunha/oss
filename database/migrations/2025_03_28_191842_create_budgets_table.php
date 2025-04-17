@@ -21,6 +21,9 @@ return new class extends Migration
     {
         Schema::create('budgets', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('checkin_id')->constrained();
+            $table->date('budget_date');
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

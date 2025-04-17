@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBudgetRequest;
-use App\Http\Requests\UpdateBudgetRequest;
-use App\Models\Budget;
-use App\Services\CheckinService;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class BudgetController extends Controller
 {
-   /**
+    /**
      * Display a listing of the resource.
      */
     public function index()
@@ -30,7 +25,7 @@ class BudgetController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBudgetRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -38,7 +33,7 @@ class BudgetController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Budget $budget)
+    public function show(string $id)
     {
         //
     }
@@ -46,7 +41,7 @@ class BudgetController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Budget $budget)
+    public function edit(string $id)
     {
         //
     }
@@ -54,7 +49,7 @@ class BudgetController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBudgetRequest $request, Budget $budget)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -62,7 +57,7 @@ class BudgetController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Budget $budget)
+    public function destroy(string $id)
     {
         //
     }

@@ -34,6 +34,11 @@ class BladeServiceProvider extends ServiceProvider
         Blade::directive('scope', function ($expression) {
             // Split the expression by `top-level` commas (not in parentheses)
             $directiveArguments = preg_split("/,(?![^\(\(]*[\)\)])/", $expression);
+
+            if($directiveArguments === false) {
+               throw new \InvalidArgumentException('Invalid expression provided for @scope directive.');
+            }
+
             $directiveArguments = array_map('trim', $directiveArguments);
 
             [$name, $functionArguments] = $directiveArguments;
