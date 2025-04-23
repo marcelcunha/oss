@@ -1,14 +1,16 @@
 @php
-    $findBrand = function (?int $id = null):string{
+    $findBrand = function (?int $id = null): string {
         return App\Models\Brand::find($id)?->name ?? '';
-    }
+    };
 @endphp
 <x-pages.show :subtitle='$checkin->client->name' backRoute="{{ route('checkins.index') }}" title='Checkin' x-data='{ show: false }'>
     <x-slot:actions>
         <div class="flex gap-x-2">
-            <x-button :href="route('budgets.create', $checkin->id)" btn='btn-xs' :disabled="$checkin->budget()->exists()" class='h-8' color=secondary title='Diagnóstico'>
-                <x-heroicon-o-wrench-screwdriver class='w-5' />
-            </x-button>
+            @if (!$checkin->budget()->exists())
+                <x-button :href="route('budgets.create', $checkin->id)" btn='btn-xs' class='h-8' color=secondary title='Orçamento'>
+                    <x-heroicon-o-wrench-screwdriver class='w-5' />
+                </x-button>
+            @endif
             <x-button :href="route('checkins.edit', $checkin->id)" btn='btn-xs' class='h-8' color=secondary title='Editar'>
                 <x-heroicon-o-pencil class='w-5' />
             </x-button>
@@ -52,7 +54,7 @@
                             value="{{ $findBrand(data_get($checkin, 'configuration.memory.0.brand_id')) }}" />
                         <x-input-text label='Modelo' name='configuration[memory][0][model]' readonly
                             value="{{ data_get($checkin, 'configuration.memory.0.model') }}" />
-                        <x-input-text label='Tamanho' name='configuration[memory][0][size]' readonly 
+                        <x-input-text label='Tamanho' name='configuration[memory][0][size]' readonly
                             value="{{ data_get($checkin, 'configuration.memory.0.size') }}">
                             <x-slot:suffix>GB</x-slot>
                         </x-input-text>
@@ -63,7 +65,7 @@
                             value="{{ $findBrand(data_get($checkin, 'configuration.storage.0.brand_id')) }}" />
                         <x-input-text label='Modelo' name='configuration[storage][0][model]' readonly
                             value="{{ data_get($checkin, 'configuration.storage.0.model') }}" />
-                        <x-input-text label='Tamanho' name='configuration[storage][0][size]' readonly 
+                        <x-input-text label='Tamanho' name='configuration[storage][0][size]' readonly
                             value="{{ data_get($checkin, 'configuration.storage.0.size') }}">
                             <x-slot:suffix>GB</x-slot>
                         </x-input-text>
@@ -74,7 +76,7 @@
                             value="{{ $findBrand(data_get($checkin, 'configuration.gpu.brand_id')) }}" />
                         <x-input-text label='Modelo' name='configuration[gpu][model]' readonly
                             value="{{ data_get($checkin, 'configuration.gpu.model') }}" />
-                        <x-input-text label='Ram' name='configuration[gpu][ram]' readonly 
+                        <x-input-text label='Ram' name='configuration[gpu][ram]' readonly
                             value="{{ data_get($checkin, 'configuration.gpu.ram') }}">
                             <x-slot:suffix>GB</x-slot>
                         </x-input-text>

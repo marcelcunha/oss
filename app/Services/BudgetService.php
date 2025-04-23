@@ -60,7 +60,7 @@ class BudgetService
                 'checkin.client.name' => ['label' => 'Cliente'],
                 'checkin.device.name' => ['label' => 'Dispositivo'],
                 'total' => ['label' => 'Valor', 'format' => 'money'],
-                'status' => ['label' => 'Status', 'format' => 'enum'],
+                'status' => ['label' => 'Status', 'custom' => true],
             ],
             'actions' => [
                 'show' => 'budgets.show',

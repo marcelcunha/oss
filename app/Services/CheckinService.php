@@ -68,6 +68,7 @@ class CheckinService
                 ],
                 'client.name' => 'Cliente',
                 'device.name' => 'Dispositivo',
+                'status' => ['label' => 'Status', 'custom' => true],
             ],
             'actions' => [
                 'show' => 'checkins.show',
