@@ -16,4 +16,13 @@ enum BudgetStatusEnum: string
             self::REJECTED => 'Rejeitado',
         };
     }
+    
+    public function color(): string
+    {
+        return match ($this) {
+            self::PENDING => 'warning',
+            self::APPROVED => 'success',
+            self::REJECTED => 'danger',
+        };
+    }
 }
