@@ -7,9 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class DeviceConfiguration extends Model
 {
-    /** @use HasFactory<\Database\Factories\DeviceConfigurationFactory> */
-    use HasFactory;
-
     protected $casts = [
         'memory' => 'array',
         'storage' => 'array',

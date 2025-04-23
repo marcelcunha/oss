@@ -6,6 +6,8 @@ use App\Http\Controllers\CheckinController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DeviceController;
+use App\Http\Requests\BudgetItemsRequest;
+use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +28,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('api')->name('api.')->group(function () {
         Route::get('/devices', [DeviceController::class, 'devices'])->name('devices');
         Route::get('/device/{device}', [DeviceController::class, 'device'])->name('device');
+        Route::post('budget-items', function (BudgetItemsRequest $request) {})
+            ->middleware([HandlePrecognitiveRequests::class])
+            ->name('budget-items.validate');
     });
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -63,5 +68,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('os')->group(function () {
         Route::resource('checkins', CheckinController::class);
+        Route::name('budgets.')->group(function () {
+            Route::get('orcamentos', [BudgetController::class, 'index'])->name('index');
+            Route::get('orcamentos/adicionar/checkin/{checkin}', [BudgetController::class, 'create'])->name('create');
+            Route::post('orcamentos', [BudgetController::class, 'store'])->name('store');
+            Route::get('orcamentos/{budget}', [BudgetController::class, 'show'])->name('show');
+            Route::get('orcamentos/{budget}/editar', [BudgetController::class, 'edit'])->name('edit');
+            Route::put('orcamentos/{budget}', [BudgetController::class, 'update'])->name('update');
+            Route::delete('orcamentos/{budget}', [BudgetController::class, 'destroy'])->name('destroy');
+
+        });
     });
 });

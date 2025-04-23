@@ -7,6 +7,14 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('budget_items');
+    }
+
+    /**
      * Run the migrations.
      */
     public function up(): void
@@ -15,16 +23,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('budget_id')->constrained();
             $table->string('description');
-            $table->unsignedInteger('amount');
+            $table->unsignedInteger('price');
             $table->timestamps();
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('budget_items');
     }
 };

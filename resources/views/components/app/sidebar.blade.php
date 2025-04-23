@@ -47,6 +47,7 @@
                     
                     <x-sidebar.menu-entry icon='cog-6-tooth' label='Gestão de Os' route-prefix='os'>
                         <x-sidebar.menu-item label='Check In' route='checkins.index' />
+                        <x-sidebar.menu-item label='Orçamento' route='budgets.index' />
                     </x-sidebar.menu-entry>
 
                 </ul>

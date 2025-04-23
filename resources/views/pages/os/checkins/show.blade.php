@@ -3,9 +3,12 @@
         return App\Models\Brand::find($id)?->name ?? '';
     }
 @endphp
-<x-pages.show :subtitle='$checkin->client->name' backRoute="{{ route('checkins.index') }}" title='Orçamento' x-data='{ show: false }'>
+<x-pages.show :subtitle='$checkin->client->name' backRoute="{{ route('checkins.index') }}" title='Checkin' x-data='{ show: false }'>
     <x-slot:actions>
         <div class="flex gap-x-2">
+            <x-button :href="route('budgets.create', $checkin->id)" btn='btn-xs' :disabled="$checkin->budget()->exists()" class='h-8' color=secondary title='Diagnóstico'>
+                <x-heroicon-o-wrench-screwdriver class='w-5' />
+            </x-button>
             <x-button :href="route('checkins.edit', $checkin->id)" btn='btn-xs' class='h-8' color=secondary title='Editar'>
                 <x-heroicon-o-pencil class='w-5' />
             </x-button>

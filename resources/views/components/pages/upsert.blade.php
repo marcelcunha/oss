@@ -12,6 +12,12 @@
             <!-- Left: Title -->
             <div class="mb-4 sm:mb-0">
                 <h1 class="text-2xl font-bold text-gray-800 md:text-3xl dark:text-gray-100">{{ $title }}</h1>
+                @isset($subtitle)
+                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                        {{ $subtitle }}
+                    </p>
+                    
+                @endisset
             </div>
 
         </div>

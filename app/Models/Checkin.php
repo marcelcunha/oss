@@ -24,6 +24,14 @@ class Checkin extends Model
     ];
 
     /**
+     * @return HasOne<Budget, $this>
+     */
+    public function budget(): HasOne
+    {
+        return $this->hasOne(Budget::class);
+    }
+
+    /**
      * @return BelongsTo<Client, $this>
      */
     public function client(): BelongsTo

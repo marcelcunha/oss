@@ -2,11 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\DeviceTypeEnum;
-use App\Models\Device;
-use Closure;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class StoreBudgetRequest extends FormRequest
 {
@@ -15,7 +11,17 @@ class StoreBudgetRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
+    }
+
+    /**
+     * Get custom validation messages.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return ['items.required' => 'É necessário adicionar pelo menos um item ao orçamento.'];
     }
 
     /**
@@ -26,7 +32,10 @@ class StoreBudgetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'budget_date' => ['required', 'date', 'before_or_equal:'.today()],
+            'notes' => ['nullable', 'string'],
+            'items' => ['required', 'array'],
+            'checkin_id' => ['exists:checkins,id'],
         ];
     }
 }

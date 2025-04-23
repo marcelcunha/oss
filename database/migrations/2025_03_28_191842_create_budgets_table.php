@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreignId('checkin_id')->constrained();
             $table->date('budget_date');
             $table->text('notes')->nullable();
+            $table->string('status', 25);
             $table->timestamps();
         });
     }

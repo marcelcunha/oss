@@ -2,18 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class UpdateBudgetRequest extends FormRequest
+class UpdateBudgetRequest extends StoreBudgetRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -21,6 +11,10 @@ class UpdateBudgetRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [];
+        return [
+            'budget_date' => ['required', 'date', 'before_or_equal:'.today()],
+            'notes' => ['nullable', 'string'],
+            'items' => ['required', 'array'],
+        ];
     }
 }
