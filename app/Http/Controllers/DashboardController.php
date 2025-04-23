@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataFeed;
+use App\Services\DashboardService;
 use Illuminate\Contracts\View\View;
 
 class DashboardController extends Controller
 {
-    public function index(): View
+    public function index(DashboardService $service): View
     {
-        $dataFeed = new DataFeed;
-
-        return view('pages/dashboard/dashboard', compact('dataFeed'));
+        return view('pages/dashboard/dashboard', $service->index());
     }
 }
