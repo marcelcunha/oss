@@ -24,11 +24,14 @@ class Table extends Component
      */
     public function __construct(
         public array $columns,
-        public LengthAwarePaginator $rows,
+        public ?LengthAwarePaginator $rows = null,
         public ?string $parentClass = null,
         public ?string $id = null,
         public array $actions = [],
+        public bool $border = false,
+        public bool $borderRed = false,
         private bool $simple = true,
+
     ) {}
 
     public function formatCell(string $column, mixed $row): string
