@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enums\BudgetStatusEnum;
+use App\Enums\QuoteStatusEnum;
 use App\Models\Budget;
 use App\Models\BudgetItem;
 use App\Models\Checkin;
@@ -31,7 +31,7 @@ class BudgetFactory extends Factory
             'checkin_id' => Checkin::factory()->create()->id,
             'budget_date' => now()->format('Y-m-d'),
             'notes' => $this->faker->sentence(),
-            'status' => BudgetStatusEnum::PENDING,
+            'status' => QuoteStatusEnum::PENDING,
         ];
     }
 }

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('budget_items');
+        Schema::dropIfExists('quote_items');
     }
 
     /**
@@ -19,7 +19,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('budget_items', function (Blueprint $table) {
+        Schema::create('quote_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('budget_id')->constrained();
             $table->string('description');

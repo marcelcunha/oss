@@ -2,14 +2,15 @@
 
 namespace App\Services;
 
-use App\Enums\BudgetStatusEnum;
+use App\Enums\QuoteStatusEnum;
 use App\Models\Budget;
 use App\Models\BudgetItem;
+use App\Models\Quote;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
-class BudgetService
+class QuoteService
 {
     public function delete(Budget $budget): void
     {
@@ -74,14 +75,14 @@ class BudgetService
      *      price: int,
      *     }>  $items
      */
-    public function store(int $checkin_id, string $budget_date, array $items, ?string $notes = null): Budget
+    public function store(int $checkin_id, string $budget_date, array $items, ?string $notes = null): Quote
     {
         return DB::transaction(function () use ($checkin_id, $budget_date, $items, $notes) {
-            $budget = Budget::create([
+            $budget = Quote::create([
                 'checkin_id' => $checkin_id,
                 'budget_date' => $budget_date,
                 'notes' => $notes,
-                'status' => BudgetStatusEnum::PENDING,
+                'status' => QuoteStatusEnum::PENDING,
             ]);
 
             foreach ($items as $item) {

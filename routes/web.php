@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\BrandController;
-use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\CheckinController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DashboardController;
@@ -69,13 +69,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('os')->group(function () {
         Route::resource('checkins', CheckinController::class);
         Route::name('budgets.')->group(function () {
-            Route::get('orcamentos', [BudgetController::class, 'index'])->name('index');
-            Route::get('orcamentos/adicionar/checkin/{checkin}', [BudgetController::class, 'create'])->name('create');
-            Route::post('orcamentos', [BudgetController::class, 'store'])->name('store');
-            Route::get('orcamentos/{budget}', [BudgetController::class, 'show'])->name('show');
-            Route::get('orcamentos/{budget}/editar', [BudgetController::class, 'edit'])->name('edit');
-            Route::put('orcamentos/{budget}', [BudgetController::class, 'update'])->name('update');
-            Route::delete('orcamentos/{budget}', [BudgetController::class, 'destroy'])->name('destroy');
+            Route::get('orcamentos', [QuoteController::class, 'index'])->name('index');
+            Route::get('orcamentos/adicionar/checkin/{checkin}', [QuoteController::class, 'create'])->name('create');
+            Route::post('orcamentos', [QuoteController::class, 'store'])->name('store');
+            Route::get('orcamentos/{budget}', [QuoteController::class, 'show'])->name('show');
+            Route::get('orcamentos/{budget}/editar', [QuoteController::class, 'edit'])->name('edit');
+            Route::put('orcamentos/{budget}', [QuoteController::class, 'update'])->name('update');
+            Route::delete('orcamentos/{budget}', [QuoteController::class, 'destroy'])->name('destroy');
 
         });
     });

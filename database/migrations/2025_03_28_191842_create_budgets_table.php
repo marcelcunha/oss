@@ -19,10 +19,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('budgets', function (Blueprint $table) {
+        Schema::create('quotes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('checkin_id')->constrained();
-            $table->date('budget_date');
+            $table->date('quote_date');
             $table->text('notes')->nullable();
             $table->string('status', 25);
             $table->timestamps();

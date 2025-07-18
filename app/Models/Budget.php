@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\BudgetStatusEnum;
+use App\Enums\QuoteStatusEnum;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +16,7 @@ class Budget extends Model
 
     protected $casts = [
         'budget_date' => 'date',
-        'status' => BudgetStatusEnum::class,
+        'status' => QuoteStatusEnum::class,
     ];
 
     protected $fillable = [

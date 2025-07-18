@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\BudgetStatusEnum;
+use App\Enums\QuoteStatusEnum;
 use App\Http\Requests\StoreBudgetRequest;
 use App\Http\Requests\UpdateBudgetRequest;
 use App\Models\Budget;
 use App\Models\Checkin;
-use App\Services\BudgetService;
+use App\Services\QuoteService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
-class BudgetController extends Controller
+class QuoteController extends Controller
 {
     /**
      * Show the form for creating a new resource.
@@ -28,9 +28,9 @@ class BudgetController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Budget $budget, BudgetService $service) : RedirectResponse
+    public function destroy(Budget $budget, QuoteService $service) : RedirectResponse
     {
-        abort_if($budget->status !== BudgetStatusEnum::PENDING, 403, 'Só é possível excluir orçamentos pendentes.');
+        abort_if($budget->status !== QuoteStatusEnum::PENDING, 403, 'Só é possível excluir orçamentos pendentes.');
 
         try {
             $service->delete($budget);
@@ -48,9 +48,9 @@ class BudgetController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Budget $budget, BudgetService $service): View
+    public function edit(Budget $budget, QuoteService $service): View
     {
-        abort_if($budget->status !== BudgetStatusEnum::PENDING, 403, 'Só é possível editar orçamentos pendentes.');
+        abort_if($budget->status !== QuoteStatusEnum::PENDING, 403, 'Só é possível editar orçamentos pendentes.');
 
         return view('pages.os.budgets.edit', $service->edit($budget));
     }
@@ -58,7 +58,7 @@ class BudgetController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(BudgetService $service): View
+    public function index(QuoteService $service): View
     {
         return view('pages.os.budgets.index', $service->index());
     }
@@ -76,7 +76,7 @@ class BudgetController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBudgetRequest $request, BudgetService $service): RedirectResponse
+    public function store(StoreBudgetRequest $request, QuoteService $service): RedirectResponse
     {
         try {
             $service->store(...$request->validated());
@@ -95,9 +95,9 @@ class BudgetController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBudgetRequest $request, Budget $budget, BudgetService $service): RedirectResponse
+    public function update(UpdateBudgetRequest $request, Budget $budget, QuoteService $service): RedirectResponse
     {
-        abort_if($budget->status !== BudgetStatusEnum::PENDING, 403, 'Só é possível editar orçamentos pendentes.');
+        abort_if($budget->status !== QuoteStatusEnum::PENDING, 403, 'Só é possível editar orçamentos pendentes.');
 
         try {
             $service->update($budget, ...$request->validated());

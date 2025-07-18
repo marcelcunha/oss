@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Enums\BudgetStatusEnum;
+use App\Enums\QuoteStatusEnum;
 use App\Models\Budget;
 use App\Models\Checkin;
 use stdClass;
@@ -21,13 +21,13 @@ class DashboardService
         
         $checkouts = new stdClass();
         $checkouts->label = 'Checkouts';
-        $checkouts->total = Budget::whereDate('budget_date', '>=', now()->subWeek())->where('status', BudgetStatusEnum::REJECTED)->count();
+        $checkouts->total = Budget::whereDate('budget_date', '>=', now()->subWeek())->where('status', QuoteStatusEnum::REJECTED)->count();
         $checkouts->icon = 'wrench-screwdriver';
         $data->checkouts = $checkouts;
 
         $budgets = new stdClass();
         $budgets->label = 'Orçamentos Pendentes';
-        $budgets->total = Budget::whereDate('budget_date', '>=', now()->subWeek())->where('status', BudgetStatusEnum::PENDING)->count();
+        $budgets->total = Budget::whereDate('budget_date', '>=', now()->subWeek())->where('status', QuoteStatusEnum::PENDING)->count();
         $budgets->icon = 'wrench-screwdriver';
         $data->budgets = $budgets;
 
