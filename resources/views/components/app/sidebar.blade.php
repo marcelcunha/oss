@@ -40,14 +40,14 @@
                 <ul class="mt-3">
 
                     <x-sidebar.menu-entry icon='document-text' label='Cadastros' route-prefix='cadastros'>
-                        <x-sidebar.menu-item label='Marcas' route='brands.index' />
                         <x-sidebar.menu-item label='Clientes' route='clients.index' />
                         <x-sidebar.menu-item label='Equipamentos' route='devices.index' />
+                        <x-sidebar.menu-item label='Marcas' route='brands.index' />
                     </x-sidebar.menu-entry>
                     
-                    <x-sidebar.menu-entry icon='cog-6-tooth' label='Gestão de Os' route-prefix='os'>
-                        <x-sidebar.menu-item label='Check In' route='checkins.index' />
-                        <x-sidebar.menu-item label='Orçamento' route='budgets.index' />
+                    <x-sidebar.menu-entry icon='cog-6-tooth' label='Manutenção' route-prefix='os'>
+                        <x-sidebar.menu-item label='Orçamento' route='quotes.index' />
+                        <x-sidebar.menu-item label='Ordens de Serviço' route='checkins.index' />
                     </x-sidebar.menu-entry>
 
                 </ul>

@@ -21,7 +21,7 @@ return new class extends Migration
     {
         Schema::create('quote_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('budget_id')->constrained();
+            $table->foreignId('quote_id')->constrained();
             $table->string('description');
             $table->unsignedInteger('price');
             $table->timestamps();

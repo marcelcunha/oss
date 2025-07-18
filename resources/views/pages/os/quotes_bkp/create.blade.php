@@ -1,14 +1,12 @@
-<x-pages.upsert title='Alterar Orçamento'>
-    <x-form action="{{ route('budgets.update', $budget->id) }}" cancelRoute="{{ route('budgets.index') }}" id='budget-form'
-        update>
+<x-pages.upsert title='Novo Orçamento'>
+    <x-form action="{{ route('quotes.store') }}" cancelRoute="{{ route('quotes.index') }}" id='budget-form'>
         <div class="grid gap-x-4 gap-y-6 lg:grid-cols-3 2xl:grid-cols-3">
-            <x-input-text label='Cliente' readonly value="{{ $budget->checkin->client->name }}" />
-            <x-input-text label='Equipamento' readonly value="{{ $budget->checkin->device->name }}" />
+            <x-input-text label='Cliente' readonly value="{{ $checkin->client->name }}" />
+            <x-input-text label='Equipamento' readonly value="{{ $checkin->device->name }}" />
             <x-input-text label='Data do Orçamento' name='budget_date' required type='date'
-                value="{{ old('budget_date', $budget->budget_date->format('Y-m-d')) }}" />
+                value="{{ old('budget_date', today()) }}" />
 
-            <x-textarea label='Anotações' name='notes' parent-class='col-span-3 mb-6'
-                value="{{ old('notes', $budget->notes) }}" />
+            <x-textarea label='Anotações' name='notes' parent-class='col-span-3 mb-6' value="{{ old('notes') }}" />
         </div>
 
         <x-card label='Ítens do Orçamento' x-data="budgetForm()">
@@ -18,11 +16,11 @@
                 <div class="flex flex-col">
                     <x-label for="description" name='description' value="Descrição *" />
                     <div class='mt-2 flex'>
-                        <x-input ::class="{ 'border-red-500': errors.hasOwnProperty('items.0.description') }" id="description" x-model="description" />
+                        <x-input ::class="{ 'border-red-500': errors.hasOwnProperty('description') }" id="description" x-model="description" />
                     </div>
 
-                    <template x-if="errors.hasOwnProperty('items.0.description')">
-                        <template x-for="error in errors['items.0.description']">
+                    <template x-if="errors.hasOwnProperty('description')">
+                        <template x-for="error in errors.description">
                             <div class="mt-1 text-xs text-red-500" x-text='error'></div>
                         </template>
                     </template>
@@ -31,11 +29,11 @@
                 <div class="flex flex-col">
                     <x-label for="price" value="Preço *" />
                     <div class='mt-2 flex'>
-                        <x-input ::class="{ 'border-red-500': errors.hasOwnProperty('items.0.price') }" class='money' id="price" name='price' x-model="price" />
+                        <x-input ::class="{ 'border-red-500': errors.hasOwnProperty('price') }" id="price" name='price' x-model="price" />
                     </div>
-                    <template x-if="errors.hasOwnProperty('items.0.price')">
+                    <template x-if="errors.hasOwnProperty('price')">
 
-                        <template :key='error' x-for="error in errors['items.0.price']">
+                        <template x-for="error in errors.price">
                             <div class="mt-1 text-xs text-red-500" x-text='error'></div>
                         </template>
                     </template>
@@ -53,7 +51,7 @@
                             <td class="p-2" x-text='item.description'>
 
                             </td>
-                            <td class="p-2" x-text='`R$ ${item.price}`'>
+                            <td class="p-2" x-text='item.price'>
                             </td>
                             <td class="whitespace-nowrap">
                                 <x-button ::disabled="loading" @click="removeItem(index)" btn='btn-xs' class="h-7 w-7"
@@ -68,13 +66,12 @@
                             <td class="p-2 text-center" colspan='3'>Não há itens registrados</td>
                         </tr>
                     </template>
-
                     <x-slot:footer>
                         <template x-if='items.length != 0'>
-                            <tr class='text-left'>
-                                <th class='p-2'>Total:</th>
-                                <th class='p-2' x-text='total'></th>
-                            </tr>
+                                <tr class='text-left'>
+                                    <th class='p-2'>Total:</th>
+                                    <th class='p-2' x-text='total'></th>
+                                </tr>
                         </template>
                     </x-slot:footer>
 
@@ -90,9 +87,10 @@
                     <input :name="'items[' + index + '][price]'" :value="item.price" type="hidden" />
                 </div>
             </template>
+            <input name='checkin_id' type="hidden" value="{{ $checkin->id }}" />
         </x-card>
     </x-form>
 
-    @include('pages.os.budgets.budget-form-script', ['items' => $items])
+    @include('pages.os.quotes.budget-form-script', ['items' => []])
 
 </x-pages.upsert>

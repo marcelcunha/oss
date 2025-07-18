@@ -7,7 +7,7 @@
     <x-slot:actions>
         <div class="flex gap-x-2">
             @if (!$checkin->budget()->exists())
-                <x-button :href="route('budgets.create', $checkin->id)" btn='btn-xs' class='h-8' color=secondary title='Orçamento'>
+                <x-button :href="route('quotes.create', $checkin->id)" btn='btn-xs' class='h-8' color=secondary title='Orçamento'>
                     <x-heroicon-o-wrench-screwdriver class='w-5' />
                 </x-button>
             @endif

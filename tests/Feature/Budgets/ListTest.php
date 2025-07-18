@@ -7,7 +7,7 @@ beforeEach(function () {
 });
 
 it('shows budgets list', function () {
-    $response = $this->actingAs($this->user)->get(route('budgets.index'));
+    $response = $this->actingAs($this->user)->get(route('quotes.index'));
 
     $response->assertStatus(200)
         ->assertSee('Orçamentos');

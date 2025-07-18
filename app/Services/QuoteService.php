@@ -3,8 +3,7 @@
 namespace App\Services;
 
 use App\Enums\QuoteStatusEnum;
-use App\Models\Budget;
-use App\Models\BudgetItem;
+use App\Models\QuoteItem;
 use App\Models\Quote;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -12,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class QuoteService
 {
-    public function delete(Budget $budget): void
+    public function delete(Quote $budget): void
     {
         DB::transaction(function () use ($budget) {
             $budget->items()->delete();
@@ -22,16 +21,16 @@ class QuoteService
 
     /**
      * @return array{
-     *     budget: Budget,
+     *     budget: Quote,
      *    items: array<array{
      *       description: string,
      *      price: int,
      *     }>
      * }
      */
-    public function edit(Budget $budget): array
+    public function edit(Quote $budget): array
     {
-        $items = $budget->items->map(function (BudgetItem $item): array {
+        $items = $budget->items->map(function (QuoteItem $item): array {
             return [
                 'description' => $item->description,
                 'price' => $item->price,
@@ -47,7 +46,7 @@ class QuoteService
 
     /**
      * @return array{
-     *      rows: LengthAwarePaginator<Budget>,
+     *      rows: LengthAwarePaginator<Quote>,
      *      columns: array<string,array<string,string>>,
      *      actions: array<string,string>,
      *     }
@@ -55,7 +54,7 @@ class QuoteService
     public function index(): array
     {
         return [
-            'rows' => Budget::with(['checkin.client', 'checkin.device.brand', 'items'])->orderBy('budget_date', 'desc')->paginate(10),
+            'rows' => Quote::with(['checkin.client', 'checkin.device.brand', 'items'])->orderBy('budget_date', 'desc')->paginate(10),
             'columns' => [
                 'budget_date' => ['label' => 'Data do orçamento', 'format' => 'date'],
                 'checkin.client.name' => ['label' => 'Cliente'],
@@ -64,7 +63,7 @@ class QuoteService
                 'status' => ['label' => 'Status', 'custom' => true],
             ],
             'actions' => [
-                'show' => 'budgets.show',
+                'show' => 'quotes.show',
             ],
         ];
     }
@@ -99,7 +98,7 @@ class QuoteService
      *      price: int,
      *     }>  $items
      */
-    public function update(Budget $budget, string $budget_date, array $items, ?string $notes = null): Budget
+    public function update(Quote $budget, string $budget_date, array $items, ?string $notes = null): Quote
     {
         return DB::transaction(function () use ($budget, $budget_date, $items, $notes) {
             $budget->update([

@@ -11,7 +11,7 @@ beforeEach(function () {
 it('should open budget edit page', function () {
     $budget = Budget::factory()->create();
 
-    $this->get(route('budgets.edit', $budget))
+    $this->get(route('quotes.edit', $budget))
         ->assertStatus(200)
         ->assertSee('Alterar Orçamento')
         ->assertSee($budget->checkin->client->name)
@@ -31,12 +31,12 @@ it('should update budget', function () {
         ],
     ];
 
-    $this->put(route('budgets.update', $budget), [
+    $this->put(route('quotes.update', $budget), [
         'budget_date' => now()->format('Y-m-d'),
         'notes' => 'Updated notes',
         'items' => $items,
     ])
-        ->assertRedirect(route('budgets.index'))
+        ->assertRedirect(route('quotes.index'))
         ->assertSessionHas('success', 'Orçamento atualizado com sucesso!');
 
     $this->assertDatabaseHas('budgets', [
@@ -65,7 +65,7 @@ it('should not update budget if status is not pending', function () {
         ],
     ];
 
-    $this->put(route('budgets.update', $budget), [
+    $this->put(route('quotes.update', $budget), [
         'budget_date' => now()->format('Y-m-d'),
         'notes' => 'Updated notes',
         'items' => $items,

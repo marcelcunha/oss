@@ -16,10 +16,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class,
-            DashboardTableSeeder::class,
             ClientSeeder::class,
             DeviceSeeder::class,
-            CheckinSeeder::class,
+            // CheckinSeeder::class,
         ]);
     }
 }

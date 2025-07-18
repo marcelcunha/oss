@@ -12,7 +12,7 @@ beforeEach(function () {
 it('should open create budget page', function () {
     $checkin = Checkin::factory()->create();
 
-    $response = $this->get(route('budgets.create', $checkin));
+    $response = $this->get(route('quotes.create', $checkin));
 
     $response->assertStatus(200);
 
@@ -29,9 +29,9 @@ it('should save new budget', function () {
         ],
     ];
 
-    $response = $this->post(route('budgets.store'), $budgetData);
+    $response = $this->post(route('quotes.store'), $budgetData);
 
-    $response->assertRedirect(route('budgets.index'))
+    $response->assertRedirect(route('quotes.index'))
         ->assertSessionHas('success', 'Orçamento cadastrado com sucesso!');
 
     $this->assertDatabaseHas('budgets', [
@@ -56,7 +56,7 @@ it('should not save budget without items', function () {
         'items' => [],
     ];
 
-    $response = $this->post(route('budgets.store'), $budgetData);
+    $response = $this->post(route('quotes.store'), $budgetData);
 
     $response->assertSessionHasErrors(['items']);
 });
@@ -70,7 +70,7 @@ it('should not save budget with invalid checkin', function () {
         ],
     ];
 
-    $response = $this->post(route('budgets.store'), $budgetData);
+    $response = $this->post(route('quotes.store'), $budgetData);
 
     $response->assertSessionHasErrors(['checkin_id']);
 });
@@ -85,7 +85,7 @@ it('should not save budget with invalid date', function () {
         ],
     ];
 
-    $response = $this->post(route('budgets.store'), $budgetData);
+    $response = $this->post(route('quotes.store'), $budgetData);
 
     $response->assertSessionHasErrors(['budget_date']);
 });

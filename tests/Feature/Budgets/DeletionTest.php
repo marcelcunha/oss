@@ -18,10 +18,10 @@ it('deletes a budget', function () {
         ]);
     }
 
-    $response = $this->delete(route('budgets.destroy', $budget));
+    $response = $this->delete(route('quotes.destroy', $budget));
 
     $response
-        ->assertRedirect(route('budgets.index'))
+        ->assertRedirect(route('quotes.index'))
         ->assertSessionHas('success', 'Orçamento excluído com sucesso!');
 
     $this->assertDatabaseMissing('budgets', [

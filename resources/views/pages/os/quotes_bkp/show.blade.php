@@ -1,9 +1,9 @@
-<x-pages.show :backRoute="route('budgets.index')" title='Orçamento' x-data="{ show: false }">
+<x-pages.show :backRoute="route('quotes.index')" title='Orçamento' x-data="{ show: false }">
 
     <x-slot:actions>
         <div class="flex gap-x-2">
         
-            <x-button :href="route('budgets.edit', $budget->id)" btn='btn-xs' class='h-8' color=secondary title='Editar'>
+            <x-button :href="route('quotes.edit', $budget->id)" btn='btn-xs' class='h-8' color=secondary title='Editar'>
                 <x-heroicon-o-pencil class='w-5' />
             </x-button>
             <x-button @click="show=true" btn='btn-xs' class='h-8' color=secondary title='Remover'>
@@ -62,7 +62,7 @@
     </x-card>
 
     <x-modal id='deleteModal'>
-        <form action="{{ route('budgets.destroy', $budget->id) }}" class="form" method="post">
+        <form action="{{ route('quotes.destroy', $budget->id) }}" class="form" method="post">
             @csrf
             @method('DELETE')
             <x-card label="Excluir Orçamento">

@@ -7,7 +7,7 @@
         </x-slot>
 
         <x-card label="Checkin">
-            <x-table :$columns :$rows :actions="$actions">
+            {{-- <x-table :$columns :$rows :actions="$actions">
                 @scope('cell', $row)
                     @if ($row->budget()->exists())
                         <x-badge color='primary'>
@@ -19,7 +19,7 @@
                         </x-badge>
                     @endif
                 @endscope
-            </x-table>
+            </x-table> --}}
             <x-slot name='footer'>
                 {{ $rows->links() }}
             </x-slot>

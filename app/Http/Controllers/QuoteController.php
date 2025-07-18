@@ -20,7 +20,7 @@ class QuoteController extends Controller
     {
         abort_if($checkin->budget()->exists(), 403, 'Só é possível haver um diagnóstico por check-in.');
 
-        return view('pages.os.budgets.create', [
+        return view('pages.os.quotes.create', [
             'checkin' => $checkin,
         ]);
     }
@@ -35,7 +35,7 @@ class QuoteController extends Controller
         try {
             $service->delete($budget);
 
-            return redirect()->route('budgets.index')
+            return redirect()->route('quotes.index')
                 ->with('success', 'Orçamento excluído com sucesso!');
         } catch (\Throwable $th) {
             report($th);
@@ -52,7 +52,7 @@ class QuoteController extends Controller
     {
         abort_if($budget->status !== QuoteStatusEnum::PENDING, 403, 'Só é possível editar orçamentos pendentes.');
 
-        return view('pages.os.budgets.edit', $service->edit($budget));
+        return view('pages.os.quotes.edit', $service->edit($budget));
     }
 
     /**
@@ -60,7 +60,7 @@ class QuoteController extends Controller
      */
     public function index(QuoteService $service): View
     {
-        return view('pages.os.budgets.index', $service->index());
+        return view('pages.os.quotes.index', $service->index());
     }
 
     /**
@@ -68,7 +68,7 @@ class QuoteController extends Controller
      */
     public function show(Budget $budget) : View
     {
-        return view('pages.os.budgets.show', [
+        return view('pages.os.quotes.show', [
             'budget' => $budget->load(['checkin.client', 'checkin.device.brand']),
         ]);
     }
@@ -81,7 +81,7 @@ class QuoteController extends Controller
         try {
             $service->store(...$request->validated());
 
-            return redirect()->route('budgets.index')
+            return redirect()->route('quotes.index')
                 ->with('success', 'Orçamento cadastrado com sucesso!');
         } catch (\Throwable $th) {
             report($th);
@@ -102,7 +102,7 @@ class QuoteController extends Controller
         try {
             $service->update($budget, ...$request->validated());
 
-            return redirect()->route('budgets.index')
+            return redirect()->route('quotes.index')
                 ->with('success', 'Orçamento atualizado com sucesso!');
         } catch (\Throwable $th) {
             report($th);
