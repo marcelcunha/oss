@@ -2,7 +2,11 @@
 
 namespace App\Services;
 
+use App\DTOs\QuoteDTO;
+use App\Enums\BrandCategoryEnum;
+use App\Enums\DeviceTypeEnum;
 use App\Enums\QuoteStatusEnum;
+use App\Models\Client;
 use App\Models\QuoteItem;
 use App\Models\Quote;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -68,20 +72,15 @@ class QuoteService
         ];
     }
 
-    /**
-     * @param  array<array{
-     *      description: string,
-     *      price: int,
-     *     }>  $items
-     */
-    public function store(int $checkin_id, string $budget_date, array $items, ?string $notes = null): Quote
+
+    public function store(QuoteDTO $dto): Quote
     {
-        return DB::transaction(function () use ($checkin_id, $budget_date, $items, $notes) {
+        return DB::transaction(function () use ($dto) {
+            $items = $dto->items;
+            
             $budget = Quote::create([
-                'checkin_id' => $checkin_id,
-                'budget_date' => $budget_date,
-                'notes' => $notes,
-                'status' => QuoteStatusEnum::PENDING,
+                ...$dto->toArray(),
+                'status' => QuoteStatusEnum::PENDING->value
             ]);
 
             foreach ($items as $item) {
@@ -117,5 +116,31 @@ class QuoteService
 
             return $budget;
         });
+    }
+
+    public function create(): array
+    {
+        $clients = Client::orderBy('name')->whereHas('devices')->pluck('name', 'id');
+        $cpuBrands = BrandService::brandsForSelect(BrandCategoryEnum::CPU);
+        $gpuBrands = BrandService::brandsForSelect(BrandCategoryEnum::GPU);
+        $moboBrands = BrandService::brandsForSelect(BrandCategoryEnum::MOTHERBOARD);
+        $ramBrands = BrandService::brandsForSelect(BrandCategoryEnum::RAM);
+        $storageBrands = BrandService::brandsForSelect(BrandCategoryEnum::STORAGE);
+        $psuplyBrands = BrandService::brandsForSelect(BrandCategoryEnum::POWERSUPPLY);
+
+        return [
+            'clients' => $clients,
+            'cpuBrands' => $cpuBrands,
+            'gpuBrands' => $gpuBrands,
+            'moboBrands' => $moboBrands,
+            'ramBrands' => $ramBrands,
+            'storageBrands' => $storageBrands,
+            'psuplyBrands' => $psuplyBrands,
+            'date' => now()->format('Y-m-d'),
+            'acceptableTypes' => [
+                DeviceTypeEnum::DESKTOP->value,
+                DeviceTypeEnum::LAPTOP->value,
+            ],
+        ];
     }
 }

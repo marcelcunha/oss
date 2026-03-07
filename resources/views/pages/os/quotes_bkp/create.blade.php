@@ -91,6 +91,6 @@
         </x-card>
     </x-form>
 
-    @include('pages.os.quotes.budget-form-script', ['items' => []])
+    @include('pages.os.quotes.quotes-form-script', ['items' => []])
 
 </x-pages.upsert>

@@ -67,10 +67,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     Route::prefix('os')->group(function () {
-        Route::resource('checkins', CheckinController::class);
         Route::name('quotes.')->group(function () {
             Route::get('orcamentos', [QuoteController::class, 'index'])->name('index');
-            Route::get('orcamentos/adicionar/checkin/{checkin}', [QuoteController::class, 'create'])->name('create');
+            Route::get('orcamentos/adicionar/', [QuoteController::class, 'create'])->name('create');
             Route::post('orcamentos', [QuoteController::class, 'store'])->name('store');
             Route::get('orcamentos/{budget}', [QuoteController::class, 'show'])->name('show');
             Route::get('orcamentos/{budget}/editar', [QuoteController::class, 'edit'])->name('edit');

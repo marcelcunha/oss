@@ -22,13 +22,6 @@ class Quote extends Model
         'status',
     ];
 
-    /**
-     * @return BelongsTo<Checkin, $this>
-     */
-    public function checkin(): BelongsTo
-    {
-        return $this->belongsTo(Checkin::class);
-    }
 
     /**
      * @return HasMany<BudgetItem, $this>

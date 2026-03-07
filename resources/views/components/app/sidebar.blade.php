@@ -46,8 +46,9 @@
                     </x-sidebar.menu-entry>
                     
                     <x-sidebar.menu-entry icon='cog-6-tooth' label='Manutenção' route-prefix='os'>
-                        <x-sidebar.menu-item label='Orçamento' route='quotes.index' />
-                        <x-sidebar.menu-item label='Ordens de Serviço' route='checkins.index' />
+                        <x-sidebar.menu-item label='Nova Entrada' route='quotes.index' />
+                        <x-sidebar.menu-item label='Orçamentos' route='quotes.index' />
+                        <x-sidebar.menu-item label='Ordens de Serviço' route='quotes.index' />
                     </x-sidebar.menu-entry>
 
                 </ul>

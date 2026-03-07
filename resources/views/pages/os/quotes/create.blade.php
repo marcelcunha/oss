@@ -1,11 +1,12 @@
-<x-pages.upsert title='Novo Checkin'>
+<x-pages.upsert title='Nova Entrada de Orçamento'>
     <x-form
-        action="{{ route('checkins.store') }}" cancelRoute="{{ route('checkins.index') }}" id='budget-form'>
+        action="{{ route('quotes.store') }}" cancelRoute="{{ route('quotes.index') }}" id='budget-form'>
         <div
             class="grid grid-cols-1 md:gap-x-4 gap-y-6 md:grid-cols-6 " x-data="budgetForm()">
+    
             <x-input-text
-                label='Data de Entrada' name='date' parent-class='md:col-span-2' required type='date'
-                value="{{ old('date') }}" />
+                label='Data de Entrada' name='quote_date' parent-class='md:col-span-2' required type='date'
+                value="{{ old('date', $date) }}" />
 
             <x-select
                 :disabled="empty($clients)" :options="$clients" label='Cliente' name='client_id' parent-class='md:col-span-2' required
