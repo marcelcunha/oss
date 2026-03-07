@@ -1,15 +1,10 @@
 <?php
 
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\QuoteController;
-use App\Http\Controllers\CheckinController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\QuoteController;
 use App\Http\Requests\BudgetItemsRequest;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use Illuminate\Support\Facades\Route;
-use Livewire\Livewire;
 
 /*
 |--------------------------------------------------------------------------

@@ -37,7 +37,7 @@ it('should save new budget', function () {
     $this->assertDatabaseHas('budgets', [
         'checkin_id' => $checkin->id,
     ]);
-    
+
     $this->assertDatabaseHas('budget_items', [
         'description' => 'Test Item',
         'price' => 100.00,

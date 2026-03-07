@@ -59,7 +59,7 @@ return new class extends Migration
             ['name' => 'Cooler Master', 'categories' => json_encode(['psuply'])],
             ['name' => 'Corsair', 'categories' => json_encode(['psuply'])],
             ['name' => 'Thermaltake', 'categories' => json_encode(['psuply'])],
-            ['name' => 'Epson', 'categories' => json_encode(['printer'])]
+            ['name' => 'Epson', 'categories' => json_encode(['printer'])],
         ];
 
         foreach ($brands as $brand) {

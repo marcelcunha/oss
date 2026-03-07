@@ -3,8 +3,6 @@
 namespace App\Services;
 
 use App\Enums\QuoteStatusEnum;
-use App\Models\Budget;
-use App\Models\Checkin;
 use App\Models\Quote;
 use stdClass;
 
@@ -12,21 +10,21 @@ class DashboardService
 {
     public function index(): array
     {
-        $data = new stdClass();
+        $data = new stdClass;
 
-        $checkins = new stdClass();
+        $checkins = new stdClass;
         $checkins->label = 'Checkins';
         $checkins->total = 0;
         $checkins->icon = 'document-check';
         $data->checkins = $checkins;
-        
-        $checkouts = new stdClass();
+
+        $checkouts = new stdClass;
         $checkouts->label = 'Checkouts';
         $checkouts->total = Quote::whereDate('budget_date', '>=', now()->subWeek())->where('status', QuoteStatusEnum::REJECTED)->count();
         $checkouts->icon = 'wrench-screwdriver';
         $data->checkouts = $checkouts;
 
-        $budgets = new stdClass();
+        $budgets = new stdClass;
         $budgets->label = 'Orçamentos Pendentes';
         $budgets->total = Quote::whereDate('budget_date', '>=', now()->subWeek())->where('status', QuoteStatusEnum::PENDING)->count();
         $budgets->icon = 'wrench-screwdriver';

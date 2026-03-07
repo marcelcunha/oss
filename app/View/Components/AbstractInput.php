@@ -14,7 +14,7 @@ abstract class AbstractInput extends Component
         if (is_null($this->name)) {
             throw new RuntimeException("Name attribute is not set for: {$this->name}!");
         }
-        
+
         $result = preg_replace('/\[(.*?)\]/', '.$1', $this->name);
 
         if (is_null($result)) {

@@ -10,7 +10,7 @@ class DeviceConfigurationDTO implements Arrayable
         public string $os,
         public int $device_id,
         public array $cpu,
-        public ?array $motherboard = null,
+        public ?array $motherboard,
         public array $memory,
         public ?array $storage = null,
         public ?array $gpu = null,

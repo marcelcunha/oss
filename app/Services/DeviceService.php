@@ -30,7 +30,7 @@ class DeviceService
     {
         return Device::query()
             ->with('brand')
-            ->when($clientId, fn($query) => $query->where('client_id', $clientId))
+            ->when($clientId, fn ($query) => $query->where('client_id', $clientId))
             ->get();
     }
 
@@ -51,6 +51,16 @@ class DeviceService
     }
 
     /**
+     * @return array<string, string>
+     */
+    public static function deviceTypesForSelect(): array
+    {
+        return Arr::mapWithKeys(DeviceTypeEnum::cases(), function (DeviceTypeEnum $type) {
+            return [$type->value => $type->label()];
+        });
+    }
+
+    /**
      * @return array<string, mixed>
      *
      * @throws InvalidArgumentException
@@ -61,15 +71,5 @@ class DeviceService
             'device' => $device,
             ...$this->create(),
         ];
-    }
-
-    /**
-     * @return array<string, string>
-     */
-    public static function deviceTypesForSelect(): array
-    {
-        return Arr::mapWithKeys(DeviceTypeEnum::cases(), function (DeviceTypeEnum $type) {
-            return [$type->value => $type->label()];
-        });
     }
 }

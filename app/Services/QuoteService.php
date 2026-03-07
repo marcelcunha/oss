@@ -7,14 +7,39 @@ use App\Enums\BrandCategoryEnum;
 use App\Enums\DeviceTypeEnum;
 use App\Enums\QuoteStatusEnum;
 use App\Models\Client;
-use App\Models\QuoteItem;
 use App\Models\Quote;
+use App\Models\QuoteItem;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 class QuoteService
 {
+    public function create(): array
+    {
+        $clients = Client::orderBy('name')->whereHas('devices')->pluck('name', 'id');
+        $cpuBrands = BrandService::brandsForSelect(BrandCategoryEnum::CPU);
+        $gpuBrands = BrandService::brandsForSelect(BrandCategoryEnum::GPU);
+        $moboBrands = BrandService::brandsForSelect(BrandCategoryEnum::MOTHERBOARD);
+        $ramBrands = BrandService::brandsForSelect(BrandCategoryEnum::RAM);
+        $storageBrands = BrandService::brandsForSelect(BrandCategoryEnum::STORAGE);
+        $psuplyBrands = BrandService::brandsForSelect(BrandCategoryEnum::POWERSUPPLY);
+
+        return [
+            'clients' => $clients,
+            'cpuBrands' => $cpuBrands,
+            'gpuBrands' => $gpuBrands,
+            'moboBrands' => $moboBrands,
+            'ramBrands' => $ramBrands,
+            'storageBrands' => $storageBrands,
+            'psuplyBrands' => $psuplyBrands,
+            'date' => now()->format('Y-m-d'),
+            'acceptableTypes' => [
+                DeviceTypeEnum::DESKTOP->value,
+                DeviceTypeEnum::LAPTOP->value,
+            ],
+        ];
+    }
+
     public function delete(Quote $budget): void
     {
         DB::transaction(function () use ($budget) {
@@ -72,15 +97,14 @@ class QuoteService
         ];
     }
 
-
     public function store(QuoteDTO $dto): Quote
     {
         return DB::transaction(function () use ($dto) {
             $items = $dto->items;
-            
+
             $budget = Quote::create([
                 ...$dto->toArray(),
-                'status' => QuoteStatusEnum::PENDING->value
+                'status' => QuoteStatusEnum::PENDING->value,
             ]);
 
             foreach ($items as $item) {
@@ -116,31 +140,5 @@ class QuoteService
 
             return $budget;
         });
-    }
-
-    public function create(): array
-    {
-        $clients = Client::orderBy('name')->whereHas('devices')->pluck('name', 'id');
-        $cpuBrands = BrandService::brandsForSelect(BrandCategoryEnum::CPU);
-        $gpuBrands = BrandService::brandsForSelect(BrandCategoryEnum::GPU);
-        $moboBrands = BrandService::brandsForSelect(BrandCategoryEnum::MOTHERBOARD);
-        $ramBrands = BrandService::brandsForSelect(BrandCategoryEnum::RAM);
-        $storageBrands = BrandService::brandsForSelect(BrandCategoryEnum::STORAGE);
-        $psuplyBrands = BrandService::brandsForSelect(BrandCategoryEnum::POWERSUPPLY);
-
-        return [
-            'clients' => $clients,
-            'cpuBrands' => $cpuBrands,
-            'gpuBrands' => $gpuBrands,
-            'moboBrands' => $moboBrands,
-            'ramBrands' => $ramBrands,
-            'storageBrands' => $storageBrands,
-            'psuplyBrands' => $psuplyBrands,
-            'date' => now()->format('Y-m-d'),
-            'acceptableTypes' => [
-                DeviceTypeEnum::DESKTOP->value,
-                DeviceTypeEnum::LAPTOP->value,
-            ],
-        ];
     }
 }

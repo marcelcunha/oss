@@ -7,9 +7,9 @@ enum DeviceTypeEnum: string
     case DESKTOP = 'desktop';
     case LAPTOP = 'laptop';
     case MOBILE = 'mobile';
+    case PRINTER = 'printer';
     case ROUTER = 'router';
     case TABLET = 'tablet';
-    case PRINTER = 'printer';
 
     public function label(): string
     {

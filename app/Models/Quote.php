@@ -5,12 +5,11 @@ namespace App\Models;
 use App\Enums\QuoteStatusEnum;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Quote extends Model
 {
-     protected $casts = [
+    protected $casts = [
         'quote_date' => 'date',
         'status' => QuoteStatusEnum::class,
     ];
@@ -21,7 +20,6 @@ class Quote extends Model
         'notes',
         'status',
     ];
-
 
     /**
      * @return HasMany<BudgetItem, $this>
@@ -37,7 +35,7 @@ class Quote extends Model
     public function total(): Attribute
     {
         return Attribute::make(
-            get: fn($value): float => $this->items->sum('price'),
+            get: fn ($value): float => $this->items->sum('price'),
         );
     }
 }

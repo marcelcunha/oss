@@ -35,8 +35,8 @@ class BladeServiceProvider extends ServiceProvider
             // Split the expression by `top-level` commas (not in parentheses)
             $directiveArguments = preg_split("/,(?![^\(\(]*[\)\)])/", $expression);
 
-            if($directiveArguments === false) {
-               throw new \InvalidArgumentException('Invalid expression provided for @scope directive.');
+            if ($directiveArguments === false) {
+                throw new \InvalidArgumentException('Invalid expression provided for @scope directive.');
             }
 
             $directiveArguments = array_map('trim', $directiveArguments);

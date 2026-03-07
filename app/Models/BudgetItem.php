@@ -21,7 +21,7 @@ class BudgetItem extends Model
     /**
      * @return BelongsTo<Budget, $this>
      */
-    public function budget() : BelongsTo
+    public function budget(): BelongsTo
     {
         return $this->belongsTo(Budget::class);
     }
@@ -32,8 +32,8 @@ class BudgetItem extends Model
     protected function price(): Attribute
     {
         return Attribute::make(
-            get: fn($value): float => (float) $value / 100,
-            set: fn($value) => preg_replace('/\D/', '', $value),
+            get: fn ($value): float => (float) $value / 100,
+            set: fn ($value) => preg_replace('/\D/', '', $value),
         );
     }
 }
