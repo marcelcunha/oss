@@ -3,77 +3,48 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta
+        content="width=device-width, initial-scale=1.0"
+        name="viewport"
+    >
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $title ?? config('app.name') }}</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet" />
-
-    <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <tallstackui:script />
 
-    <!-- Styles -->
-
-    <script>
-        if (localStorage.getItem('dark-mode') === 'false' || !('dark-mode' in localStorage)) {
-            document.querySelector('html').classList.remove('dark');
-            document.querySelector('html').style.colorScheme = 'light';
-        } else {
-            document.querySelector('html').classList.add('dark');
-            document.querySelector('html').style.colorScheme = 'dark';
-        }
-    </script>
+    @livewireStyles
 </head>
 
-<body class="font-inter antialiased bg-gray-100 dark:bg-gray-900 text-gray-600 dark:text-gray-400"
-    :class="{ 'sidebar-expanded': sidebarExpanded }" x-data="{ sidebarOpen: false, sidebarExpanded: localStorage.getItem('sidebar-expanded') == 'true' }" x-init="$watch('sidebarExpanded', value => localStorage.setItem('sidebar-expanded', value))">
+<body>
+    <x-layout>
+        <x-slot:header>
+            <x-layout.header>
+                <x-slot:right>
+                    <x-dropdown text="Hello, {{ auth()->user()->name }}!">
+                        <form
+                            action="{{ route('logout') }}"
+                            method="POST"
+                        >
+                            @csrf
+                            <x-dropdown.items
+                                onclick="event.preventDefault(); this.closest('form').submit();"
+                                text="Logout"
+                            />
+                        </form>
+                    </x-dropdown>
+                </x-slot:right>
+            </x-layout.header>
+        </x-slot:header>
 
-    <script>
-        if (localStorage.getItem('sidebar-expanded') == 'true') {
-            document.querySelector('body').classList.add('sidebar-expanded');
-        } else {
-            document.querySelector('body').classList.remove('sidebar-expanded');
-        }
-    </script>
+        <x-slot:menu>
+           @include('components.sidebar')
+        </x-slot:menu>
 
-    <!-- Page wrapper -->
-    <div class="flex h-[100dvh] overflow-hidden">
+        {{ $slot }}
+    </x-layout>
 
-        <x-app.sidebar :variant="$attributes['sidebarVariant']" />
-
-        <!-- Content area -->
-        <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden @if ($attributes['background']) {{ $attributes['background'] }} @endif"
-            x-ref="contentarea">
-
-            <x-app.header :variant="$attributes['headerVariant']" />
-
-            <main class="grow">
-                {{ $slot }}
-            </main>
-
-        </div>
-
-    </div>
-
-    @yield('js')
-    <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('modalStore', () => ({
-                show: false,
-                id: null,
-                init() {
-                    window.addEventListener('open-modal', (event) => {
-                        id: event.detail.id;
-                        this.show = true;
-                    });
-                }
-            }));
-        });
-    </script>
+    @livewireScripts
 </body>
 
 </html>
