@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use TallStackUi\Facades\TallStackUi;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,6 +14,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Model::preventLazyLoading(! app()->isProduction());
+
+        TallStackUi::customize()->card()->block('footer.wrapper')->append('flex justify-end gap-2');
     }
 
     /**
